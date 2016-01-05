@@ -2,6 +2,8 @@
 
 Spectre is a web application to diff screenshots. It's heavily influence by [VisualReview](https://github.com/xebia/VisualReview), [BackstopJS](https://github.com/garris/BackstopJS) and [Wraith](https://github.com/BBC-News/wraith).
 
+![Spectre!](spectre_screenshot.png)
+
 ## Requirements
 
 * Postgres
