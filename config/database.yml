@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: spectre_development
+  pool: 5
+  username:
+  password:
+
+test: &TEST
+  adapter: postgresql
+  encoding: utf8
+  database: spectre_test
+  pool: 5
+  username:
+  password:
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: spectre_production
+  pool: 5
+  username:
+  password:

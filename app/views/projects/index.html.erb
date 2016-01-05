@@ -1,0 +1,32 @@
+<h1>Projects</h1>
+
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Name</th>
+      <th>Suite</th>
+      <th>Last run</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <% project.suites.each_with_index do |suite, i| %>
+      <tr>
+        <th><%= project.name %></th>
+        <td><%= link_to suite.name, suite_path(suite) %></td>
+        <td><%= link_to "##{suite.latest_run.sequential_id}", run_path(suite.latest_run) %> <span class="text-muted"><%= suite.latest_run.created_at.to_formatted_s(:long_ordinal) %></span>
+          <% if suite.latest_run.tests.count == 0 %>
+            <span class="label label-info">No tests</span>
+          <% end %>
+          <% if suite.latest_run.passing_tests > 0 %>
+            <span class="label label-success"><%= suite.latest_run.passing_tests %> passed</span>
+          <% end %>
+          <% if suite.latest_run.failing_tests > 0 %>
+            <span class="label label-danger"><%= suite.latest_run.failing_tests %> failed</span>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

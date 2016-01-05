@@ -1,0 +1,19 @@
+<tr id="test_<%= test.id %>" class="<%= "table-danger" unless test.pass?  %>">
+  <th>
+    <%= test.name %>
+    <p><small>
+      Browser: <%= test.browser %><br>
+      Plaform: <%= test.platform %><br>
+      Size: <%= test.width %>px
+    </small></p>
+  </th>
+  <td><%= image_tag test.screenshot_baseline.url %></td>
+  <td><%= image_tag test.screenshot.url %></td>
+  <td><%= image_tag test.screenshot_diff.url unless test.screenshot_diff.nil? %></td>
+  <td>
+    <span class="label label-<%= test.pass? ? 'success' : 'danger' %>"><%= test.pass? ? 'Pass' : 'Fail' %></span>
+    <% if !test.baseline %>
+      <br><br><%= link_to("Set as baseline", test_url(test, baseline: true), method: 'put', class: 'btn btn-secondary btn-sm') %>
+    <% end %>
+  </td>
+</tr>

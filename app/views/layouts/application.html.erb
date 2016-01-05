@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spectre</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="navbar navbar-dark bg-primary">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Spectre</a>
+    </div>
+  </div>
+</div>
+
+<div class="main container">
+  <%= yield %>
+</div>
+
+</body>
+</html>

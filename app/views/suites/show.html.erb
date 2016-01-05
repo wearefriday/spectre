@@ -1,0 +1,63 @@
+<ul class="breadcrumb">
+  <li><%= link_to 'Projects', projects_url %></li>
+  <li><%= link_to @suite.project.name, projects_url %></li>
+  <li><%= @suite.name %></li>
+</ul>
+
+<h1><%= @suite.name %> <span class="text-muted">(<%= @suite.project.name %>)</span></h1>
+
+<h2>Latest runs</h2>
+<table class="table table-striped">
+  <thead class="thead-inverse">
+    <tr>
+      <th>#</th>
+      <th>Date</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @suite.runs.reversed.limit(5).each do |run| %>
+      <tr>
+        <th><%= link_to "##{run.sequential_id}", run_url(run.id) %></th>
+        <td class="text-muted"><%= run.created_at.to_formatted_s(:long_ordinal) %></td>
+        <td>
+          <% if run.tests.count == 0 %>
+            <span class="label label-info">No tests</span>
+          <% end %>
+          <% if run.passing_tests > 0 %>
+            <span class="label label-success"><%= run.passing_tests %> passed</span>
+          <% end %>
+          <% if run.failing_tests > 0 %>
+            <span class="label label-danger"><%= run.failing_tests %> failed</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Baselines</h2>
+<%= render 'shared/test_filters', tests: @baselines %>
+<table class="table table-striped">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Test</th>
+      <th>Browser</th>
+      <th>Platform</th>
+      <th>Size</th>
+      <th>Screenshot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @baselines.tests.each do |test| %>
+      <tr>
+        <th><%= test.name %></th>
+        <td><%= test.browser %></td>
+        <td><%= test.platform %></td>
+        <td><%= test.width %></td>
+        <td><%= image_tag test.screenshot.url %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

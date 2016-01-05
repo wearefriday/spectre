@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  browser: MyString
+  platform: MyString
+  width: MyString
+  run_id: 
+  baseline: false
+  diff: 1.5
+  diff_against_id: 
+
+two:
+  name: MyString
+  browser: MyString
+  platform: MyString
+  width: MyString
+  run_id: 
+  baseline: false
+  diff: 1.5
+  diff_against_id: 
