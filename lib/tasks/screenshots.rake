@@ -1,6 +1,7 @@
 require 'capybara'
 require 'capybara/poltergeist'
 require 'rest_client'
+require 'dotenv/tasks'
 
 task :screenshots do
   spectre = SpectreClient.new('Nuffield', 'Templates')
@@ -61,7 +62,7 @@ end
 
 class SpectreClient
   def initialize(project_name, suite_name)
-    request = RestClient.post('http://localhost:3001/runs',
+    request = RestClient.post("#{ENV['PROTOCOL']}#{ENV['DOMAIN_NAME']}#{ENV['PORT']}/runs",
       project: project_name,
       suite: suite_name
     )
@@ -70,7 +71,7 @@ class SpectreClient
   end
 
   def submit_test(name, browser, platform, width, screenshot)
-    request = RestClient.post('http://localhost:3001/tests',
+    request = RestClient.post("#{ENV['PROTOCOL']}#{ENV['DOMAIN_NAME']}#{ENV['PORT']}/tests",
       test: {
         run_id: @run_id,
         name: name,
