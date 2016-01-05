@@ -42,6 +42,12 @@ Then you can submit a screenshot!
 * `width` is the screenshot size
 * `screenshot` is the image itself. PNGs are preferred
 
+## Dummy tests
+
+An example test run can be executed using:
+
+    bundle exec rake screenshots
+
 ## TODO
 
 * massively refactor to remove code from fat controllers
