@@ -21,20 +21,20 @@ A "test" is a screenshot and associated metadata. A test is categorised under a 
 
 First you should create a new "run". The JSON response will contain the `run_id` to submit with each subsequent test.
 
-POST /runs
-  project: My Projetc Name
-  suite: My Suite Name
+    POST /runs
+      project: My Projetc Name
+      suite: My Suite Name
 
 Then you can submit a screenshot!
 
-POST /tests
-  test:
-    run_id: {run_id from above},
-    name: Homepage,
-    platform: OSX,
-    browser: PhantomJS,
-    width: 1024,
-    screenshot: <File>
+    POST /tests
+      test:
+        run_id: {run_id from above},
+        name: Homepage,
+        platform: OSX,
+        browser: PhantomJS,
+        width: 1024,
+        screenshot: <File>
 
 * `name` is a friendly name of your test. It should describe the template, component or state of the thing you've screenshotted
 * `platform` is the OS/platform that the screenshot was taken on (e.g. OSX, Windows, iOS, Android etc.)
