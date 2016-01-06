@@ -14,7 +14,7 @@
       <tr>
         <th><%= project.name %></th>
         <td><%= link_to suite.name, project_suite_path(suite.project, suite) %></td>
-        <td><%= link_to "##{suite.latest_run.sequential_id}", project_suite_run_path(suite.project, suite, suite.latest_run.sequential_id) %> <span class="text-muted"><%= suite.latest_run.created_at.to_formatted_s(:long_ordinal) %></span>
+        <td><%= link_to "##{suite.latest_run.sequential_id}", project_suite_run_path(suite.project, suite, suite.latest_run) %> <span class="text-muted"><%= suite.latest_run.created_at.to_formatted_s(:long_ordinal) %></span>
           <% if suite.latest_run.tests.count == 0 %>
             <span class="label label-info">No tests</span>
           <% end %>
