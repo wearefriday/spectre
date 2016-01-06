@@ -12,8 +12,9 @@ Spectre is a web application to diff screenshots. It's heavily influence by [Vis
 ## Setup
 
 * Clone the repo
-* `bundle exec rake db:create && bundle exec rake db:migrate`
+* `bundle exec rake db:create && bundle exec rake db:schema:load`
 * `bundle exec rails s`
+* Copy `.env.example` and rename to `.env`. Change the url details if you need to.
 
 ## Submitting tests
 
