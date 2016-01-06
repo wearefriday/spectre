@@ -15,8 +15,6 @@
 //= require turbolinks
 //= require_tree .
 
-//= require bootstrap
-
 $(document).on('ready page:load', function () {
 
   $('.test-filters').each(function() {

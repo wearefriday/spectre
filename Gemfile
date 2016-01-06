@@ -17,7 +17,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rails_admin'
 gem 'sequenced'
-gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'dragonfly', '~> 1.0.12'
 gem 'image_size'
 
