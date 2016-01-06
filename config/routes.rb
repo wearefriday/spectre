@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   resources :runs, only: [:new, :create]
   resources :tests, only: [:update, :new, :create]
+
+  get '/baselines/:key', to: 'baselines#show', as: :baseline
 end
