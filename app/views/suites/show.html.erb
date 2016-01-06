@@ -18,7 +18,7 @@
   <tbody>
     <% @suite.runs.reversed.limit(5).each do |run| %>
       <tr>
-        <th><%= link_to "##{run.sequential_id}", run_url(run.id) %></th>
+        <th><%= link_to "##{run.sequential_id}", project_suite_run_path(run.suite.project, run.suite, run.sequential_id) %></th>
         <td class="text-muted"><%= run.created_at.to_formatted_s(:long_ordinal) %></td>
         <td>
           <% if run.tests.count == 0 %>

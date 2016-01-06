@@ -2,7 +2,8 @@ class RunsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    @run = Run.find(params[:id])
+    @suite = Suite.find(params[:suite_id])
+    @run = @suite.runs.find_by_sequential_id(params[:id])
     @tests = TestFilters.new(@run.tests, params)
   end
 

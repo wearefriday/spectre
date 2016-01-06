@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><%= link_to 'Projects', projects_url %></li>
   <li><%= link_to @run.suite.project.name, projects_url %></li>
-  <li><%= link_to @run.suite.name, suite_url(@run.suite) %></li>
+  <li><%= link_to @run.suite.name, project_suite_url(@run.suite.project, @run.suite) %></li>
   <li>#<%= @run.sequential_id %></li>
 </ul>
 

@@ -26,7 +26,7 @@ class TestsController < ApplicationController
       @test.baseline = true
       @test.save
 
-      redirect_to run_url(@test.run)
+      redirect_to project_suite_run_url(@test.run.suite.project, @test.run.suite, @test.run)
     end
   end
 
