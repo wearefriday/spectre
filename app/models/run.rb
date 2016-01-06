@@ -7,9 +7,9 @@ class Run < ActiveRecord::Base
     order('created_at DESC')
   end
 
-  # def to_param
-  #   self.sequential_id.to_s
-  # end
+  def to_param
+    sequential_id.to_s
+  end
 
   def passing_tests
     self.tests.where(pass: true).count

@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   get '/' => redirect('/projects')
 
-  resources :projects, only: [:index] do
-    resources :suites, only: [:show] do
-      resources :runs, only: [:show]
+  resources :projects, param: :slug, only: [:index] do
+    resources :suites, param: :slug, only: [:show] do
+      resources :runs, param: :sequential_id, only: [:show]
     end
   end
 

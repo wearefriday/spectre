@@ -10,4 +10,8 @@ class Suite < ActiveRecord::Base
   def baselines
     tests.where(baseline: true)
   end
+
+  def to_param
+    slug
+  end
 end
