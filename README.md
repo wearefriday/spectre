@@ -50,8 +50,9 @@ An example test run can be executed using:
 
 ## TODO
 
-* massively refactor to remove code from fat controllers
+* refactor to remove code from fat controllers
 * JSON output for a whole Run rather than a single test?
 * ability to get a canonical link to the baseline screenshot for a named test (e.g. ability to hotlink a screenshot into a component library)
-* sort out routing, currently they're not nested resources but probably could be
 * test coverage is currently nil
+* upgrade to Rails 5 when released
+* use ActionCable on Run::show view to update list as tests are submitted
