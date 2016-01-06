@@ -23,14 +23,6 @@ class RunsController < ApplicationController
 
     @run = @suite.runs.create
 
-    render :json => {
-      project_id: @project.id,
-      project_name: @project.name,
-      suite_id: @suite.id,
-      suite_name: @suite.name,
-      run_id: @run.id,
-      run_sequence: @run.sequential_id,
-      run_url: @run.url
-    }
+    render :json => @run.to_json
   end
 end

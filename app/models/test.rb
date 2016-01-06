@@ -1,17 +1,11 @@
 class Test < ActiveRecord::Base
   after_initialize :default_values
-  #ßattr_accessible :screenshot, :screenshot_baseline, :screenshot_diff
   belongs_to :run
-
-  DIFF_THRESHOLD = 0.1
-
   default_scope { order('created_at ASC') }
-
   dragonfly_accessor :screenshot
   dragonfly_accessor :screenshot_baseline
   dragonfly_accessor :screenshot_diff
-
-  validates :name, :browser, :platform, :width, :run, presence: true
+  validates :name, :browser, :platform, :width, :run, :screenshot, presence: true
 
   def self.find_by_key
     self.where("key = ?", key)
@@ -38,5 +32,6 @@ class Test < ActiveRecord::Base
     self.diff ||= 0
     self.baseline ||= false
     self.dimensions_changed ||= false
+    self.pass ||= false
   end
 end
