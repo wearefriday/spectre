@@ -11,6 +11,12 @@ class Run < ActiveRecord::Base
     sequential_id.to_s
   end
 
+  def as_json(options)
+    run = super(options)
+    run[:url] = self.url
+    return run
+  end
+
   def passing_tests
     self.tests.where(pass: true).count
   end
@@ -19,8 +25,7 @@ class Run < ActiveRecord::Base
     self.tests.where(pass: false).count
   end
 
-  # TODO: how to access routes from within a model?
   def url
-    "/runs/#{id}"
+    Rails.application.routes.url_helpers.project_suite_run_path(self.suite.project, self.suite, self)
   end
 end
