@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'dotenv-rails', :groups => [:development, :test]
+
 gem 'rails', '4.2.5'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -20,15 +20,11 @@ gem 'sequenced'
 gem 'dragonfly', '~> 1.0.12'
 gem 'image_size'
 
-# for demo script only
-gem 'poltergeist'
-gem 'rest-client'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -41,6 +37,11 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+
+  # for demo script only
+  gem 'poltergeist'
+  gem 'rest-client'
+  gem 'dotenv-rails'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
