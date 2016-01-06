@@ -6,18 +6,10 @@ development:
   username:
   password:
 
-test: &TEST
-  adapter: postgresql
-  encoding: utf8
-  database: spectre_test
-  pool: 5
-  username:
-  password:
-
 production:
   adapter: postgresql
   encoding: utf8
-  database: spectre_production
+  database: wafi-spectre
   pool: 5
-  username:
-  password:
+  username: deploy
+  port: 5432
