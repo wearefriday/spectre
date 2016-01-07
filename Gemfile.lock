@@ -1,3 +1,9 @@
+GIT
+  remote: ssh://git@git.wearefriday.com:7999/wafi/spectre_client.git
+  revision: 927e7a08a5e23683db2512c5a086f5f326659ca0
+  specs:
+    spectre_client (0.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -239,6 +245,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sequenced
+  spectre_client!
   spring
   therubyracer
   turbolinks
