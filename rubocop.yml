@@ -1,0 +1,54 @@
+---
+AllCops:
+  # Uncomment this line for rails projects
+  # RunRailsCops: true
+
+  # Output settings
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+
+# Don't enforce comments classes
+Documentation:
+  Enabled: false
+
+# Debugger statements are ok in in the development_steps file
+# This is for the 'save_and_open' step many projects have, which saves the webpage, and opens a browser.
+Lint/Debugger:
+  Exclude:
+    - features/step_definitions/development_steps.rb
+
+Metrics/AbcSize:
+  Exclude:
+    - 'features/**/*'
+    - 'spec/**/*'
+
+# Disable class length check for tests
+Metrics/ClassLength:
+  Exclude:
+    - 'features/**/*'
+    - 'spec/**/*'
+
+# Disable method length check for tests
+Metrics/MethodLength:
+  Exclude:
+    - 'features/**/*'
+    - 'spec/**/*'
+
+# 120 character width
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - 'features/**/*'
+    - 'spec/**/*'
+
+# Allow method names starting with 'get_'
+Style/AccessorMethodName:
+  Enabled: false
+
+# Allow non-ascii characters in comments â€“ e.g. the 'em' dash: â€“
+Style/AsciiComments:
+  Enabled: false
+
+# Any quotes are fine for strings â€“ single or double
+Style/StringLiterals:
+  Enabled: false
