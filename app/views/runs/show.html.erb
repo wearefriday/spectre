@@ -7,7 +7,7 @@
 
 <h1>Run #<%= @run.sequential_id %> <span class="text-muted">(<%= @run.suite.name %>)</span></h1>
 
-<%= render 'shared/test_filters', tests: @tests %>
+<%= render 'shared/test_filters', test_filters: @test_filters %>
 
 <table class="table table-striped ">
   <thead class="thead-inverse">
@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @tests.tests.each do |test| %>
+    <% @test_filters.tests.each do |test| %>
       <%= render test %>
     <% end %>
   </tbody>
