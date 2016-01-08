@@ -13,3 +13,14 @@ production:
   pool: 5
   username: deploy
   port: 5432
+
+test: &test
+  adapter: postgresql
+  encoding: utf8
+  database: spectre_test
+  pool: 5
+  username:
+  password:
+
+cucumber:
+  <<: *test

@@ -34,7 +34,8 @@ gem 'unicorn'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'cucumber'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
   gem 'rspec'
 end
 
@@ -46,7 +47,7 @@ group :development do
   gem 'poltergeist'
   gem 'rest-client'
   gem 'dotenv-rails'
-gem "spectre_client", git: 'ssh://git@git.wearefriday.com:7999/wafi/spectre_client.git'
+  gem 'spectre_client', git: 'ssh://git@git.wearefriday.com:7999/wafi/spectre_client.git'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

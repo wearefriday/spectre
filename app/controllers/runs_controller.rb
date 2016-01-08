@@ -13,18 +13,9 @@ class RunsController < ApplicationController
   end
 
   def create
-    @project = Project.find_by_name(params[:project])
-    if @project.nil?
-      @project = Project.create(name: params[:project], slug: params[:project].parameterize)
-    end
-
-    @suite = @project.suites.find_by_name(params[:suite])
-    if @suite.nil?
-      @suite = @project.suites.create(name: params[:suite], slug: params[:suite].parameterize)
-    end
-
-    @run = @suite.runs.create
-
+    project = Project.find_or_create_by(name: params[:project])
+    suite = project.suites.find_or_create_by(name: params[:suite])
+    @run = suite.runs.create
     render :json => @run.to_json
   end
 end
