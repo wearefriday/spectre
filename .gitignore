@@ -19,3 +19,4 @@ public/system/dragonfly
 /tmp
 
 .env
+.byebug_history

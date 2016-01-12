@@ -31,28 +31,23 @@ class TestsController < ApplicationController
   end
 
   def create
-    test_params = params.require(:test).permit(:name, :platform, :browser, :width, :screenshot, :run_id)
-
     # create test and run validations
     @test = Test.create!(test_params)
 
-    key = @test.create_key
-    @test.key = key
-
     # find an existing baseline screenshot for this test
-    baseline_test = Test.find_baseline_by_key(key)
+    baseline_test = Test.find_baseline_by_key(@test.key)
 
-    if baseline_test.nil?
-      # if no baseline exists (i.e. this is the first run of this test), mark test as the baseline
+    if baseline_test
+      # grab the existing baseline image and cache it against this test
+      @test.screenshot_baseline = baseline_test.screenshot
+    else
+      # otherwise if no baseline exists (i.e. this is the first run of this test), mark test as the baseline
       @test.baseline = true
       @test.screenshot_baseline = test_params[:screenshot]
-    else
-      # otherwise grab the existing baseline image and cache it against this test
-      @test.screenshot_baseline = baseline_test.screenshot
     end
 
     # force save so that dragonfly does it persistence on the baseline image
-    @test.save
+    @test.save!
 
     # get the width/height of both the baseline and the test image
     baseline_screenshot_details = identify_image_geometry(@test.screenshot_baseline.path)
@@ -121,6 +116,10 @@ class TestsController < ApplicationController
   end
 
   private
+
+  def test_params
+    params.require(:test).permit(:name, :platform, :browser, :width, :screenshot, :run_id)
+  end
 
   # taken from Peter's artefact comparison code
   def identify_image_geometry(file_path)

@@ -21,11 +21,6 @@ gem 'dragonfly', '~> 1.0.12'
 gem 'image_size'
 
 
-# for demo script only
-gem 'poltergeist'
-gem 'rest-client'
-gem "spectre_client", git: 'ssh://git@git.wearefriday.com:7999/wafi/spectre_client.git'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -39,6 +34,10 @@ gem 'unicorn'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'rest-client'
+  gem 'rspec'
 end
 
 group :development do
@@ -49,7 +48,7 @@ group :development do
   gem 'poltergeist'
   gem 'rest-client'
   gem 'dotenv-rails'
-
+  gem 'spectre_client', git: 'ssh://git@git.wearefriday.com:7999/wafi/spectre_client.git'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

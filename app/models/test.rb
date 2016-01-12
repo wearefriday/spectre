@@ -1,5 +1,6 @@
 class Test < ActiveRecord::Base
   after_initialize :default_values
+  after_create :create_key
   belongs_to :run
   default_scope { order('created_at ASC') }
   dragonfly_accessor :screenshot
@@ -8,16 +9,13 @@ class Test < ActiveRecord::Base
   validates :name, :browser, :platform, :width, :run, :screenshot, presence: true
 
   def self.find_by_key
-    self.where("key = ?", key)
+    where(key: key)
   end
 
   def self.find_baseline_by_key(key)
-    self.where("key = ? AND baseline = ?", key, true).first
+    where(key: key, baseline: true).first
   end
 
-  def create_key
-    "#{run.suite.project.name} #{run.suite.name} #{name} #{browser} #{platform} #{width}".parameterize
-  end
 
   def pass?
     pass
@@ -27,7 +25,12 @@ class Test < ActiveRecord::Base
     "#{run.url}#test_#{id}"
   end
 
+  def create_key
+    self.key = "#{run.suite.project.name} #{run.suite.name} #{name} #{browser} #{platform} #{width}".parameterize
+  end
+
   private
+
   def default_values
     self.diff ||= 0
     self.baseline ||= false

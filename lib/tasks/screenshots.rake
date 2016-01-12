@@ -5,7 +5,7 @@ if Rails.env.development?
   require 'dotenv/tasks'
   require 'spectre_client'
 
-
+  desc "gets some screens from nuffield health"
   task :screenshots do
     spectre = SpectreClient::Client.new('Nuffield', 'Templates', "#{ENV['PROTOCOL']}#{ENV['DOMAIN_NAME']}#{ENV['PORT']}")
     puts "Created Specture run"
