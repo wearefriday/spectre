@@ -27,6 +27,7 @@ class Test < ActiveRecord::Base
 
   def create_key
     self.key = "#{run.suite.project.name} #{run.suite.name} #{name} #{browser} #{platform} #{width}".parameterize
+    self.save
   end
 
   private
