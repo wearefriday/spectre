@@ -23,5 +23,10 @@
     <% @test_filters.tests.each do |test| %>
       <%= render test %>
     <% end %>
+    <% if @test_filters.tests.count == 0 %>
+    <tr>
+      <td colspan="5">No matching tests found.</td>
+    </tr>
+    <% end %>
   </tbody>
 </table>
