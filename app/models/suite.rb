@@ -9,7 +9,7 @@ class Suite < ActiveRecord::Base
   end
 
   def create_slug
-    self.slug ||= name.parameterize
+    self.slug ||= name.to_s.parameterize
   end
 
   def baselines
