@@ -7,12 +7,12 @@
       Size: <%= test.width %>px
     </small></p>
   </th>
-  <td><%= image_tag test.screenshot_baseline.url %></td>
-  <td><%= image_tag test.screenshot.url %></td>
+  <td><%= image_tag test.screenshot_baseline.url unless test.screenshot_baseline.nil? %></td>
+  <td><%= image_tag test.screenshot.url unless test.screenshot.nil? %></td>
   <td><%= image_tag test.screenshot_diff.url unless test.screenshot_diff.nil? %></td>
   <td>
-    <span class="label label-<%= test.pass? ? 'success' : 'danger' %>"><%= test.pass? ? 'Pass' : 'Fail' %></span>
-    <% if !test.baseline %>
+    <span class="label label-<%= test.pass? ? 'success' : 'danger' %>"><%= test.pass? ? 'Passed' : 'Failed' %></span>
+    <% if !test.baseline && test.screenshot %>
       <br><br><%= link_to("Set as baseline", test_url(test, baseline: true), method: 'put', class: 'btn btn-secondary btn-sm') %>
     <% end %>
   </td>
