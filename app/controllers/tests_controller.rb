@@ -101,10 +101,18 @@ class TestsController < ApplicationController
       # should probably raise an error here
     end
 
-    # assign temporary images to the test to allow dragonfly to process and persist
-    @test.screenshot = Pathname.new(test_screenshot_tmp_path)
-    @test.screenshot_baseline = Pathname.new(baseline_screenshot_tmp_path)
-    @test.screenshot_diff = Pathname.new(diff_screenshot_tmp_path)
+    if @test.pass== true && @test.baseline == false
+      # don't store screenshots for passing tests that aren't baselines
+      @test.screenshot = nil
+      @test.screenshot_baseline = nil
+      @test.screenshot_diff = nil
+    else
+      # assign temporary images to the test to allow dragonfly to process and persist
+      @test.screenshot = Pathname.new(test_screenshot_tmp_path)
+      @test.screenshot_baseline = Pathname.new(baseline_screenshot_tmp_path)
+      @test.screenshot_diff = Pathname.new(diff_screenshot_tmp_path)
+    end
+
     @test.save
 
     # remove the temporary files
