@@ -1,7 +1,7 @@
 ---
 AllCops:
   # Uncomment this line for rails projects
-  # RunRailsCops: true
+  RunRailsCops: true
 
   # Output settings
   DisplayCopNames: true
