@@ -1,7 +1,5 @@
-require 'open3'
-require "image_size"
-#require 'image_size'
-#require 'v8'
+require 'image_size'
+require 'image_geometry'
 
 class TestsController < ApplicationController
   skip_before_action :verify_authenticity_token
@@ -50,32 +48,32 @@ class TestsController < ApplicationController
     @test.save!
 
     # get the width/height of both the baseline and the test image
-    baseline_screenshot_details = identify_image_geometry(@test.screenshot_baseline.path)
-    test_screenshot_details = identify_image_geometry(@test.screenshot.path)
-
+    baseline_screenshot_details = ImageGeometry.new(@test.screenshot_baseline.path)
+    test_screenshot_details = ImageGeometry.new(@test.screenshot.path)
     # create a canvas using the baseline's dimensions
     canvas = {
-      width: baseline_screenshot_details[:width],
-      height: baseline_screenshot_details[:height]
+      width: baseline_screenshot_details.width,
+      height: baseline_screenshot_details.height
     }
 
+
     # enlarge the canvas to the wider of the two widths
-    if test_screenshot_details[:width] > canvas[:width]
-      canvas[:width] = test_screenshot_details[:width]
+    if test_screenshot_details.width > canvas[:width]
+      canvas[:width] = test_screenshot_details.width
       @test.dimensions_changed = true
     end
 
-    if test_screenshot_details[:width] < canvas[:width]
+    if test_screenshot_details.width < canvas[:width]
       @test.dimensions_changed = true
     end
 
     # enlarge canvas to the wider of the two heights
-    if test_screenshot_details[:height] > canvas[:height]
-      canvas[:height] = test_screenshot_details[:height]
+    if test_screenshot_details.height > canvas[:height]
+      canvas[:height] = test_screenshot_details.height
       @test.dimensions_changed = true
     end
 
-    if test_screenshot_details[:height] < canvas[:height]
+    if test_screenshot_details.height < canvas[:height]
       @test.dimensions_changed = true
     end
 
@@ -127,21 +125,6 @@ class TestsController < ApplicationController
 
   def test_params
     params.require(:test).permit(:name, :platform, :browser, :width, :screenshot, :run_id)
-  end
-
-  # taken from Peter's artefact comparison code
-  def identify_image_geometry(file_path)
-    stdout_str, status = Open3.capture2("identify -verbose #{file_path.shellescape}")
-    if status.exitstatus == 0
-      geometry = /Geometry: (.*)/.match(stdout_str)[1]
-      {
-        geometry: geometry,
-        width: /(\d+)x(\d+)/.match(geometry)[1],
-        height: /(\d+)x(\d+)/.match(geometry)[2],
-      }
-    else
-      return { file_path: file_path, unsupported: true }
-    end
   end
 
   def convert_image_command(input_file, output_file, canvas)
