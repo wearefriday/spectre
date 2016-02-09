@@ -16,6 +16,11 @@ class Test < ActiveRecord::Base
     where(key: key, baseline: true).first
   end
 
+  def as_json(options)
+    run = super(options)
+    run[:url] = self.url
+    return run
+  end
 
   def pass?
     pass
