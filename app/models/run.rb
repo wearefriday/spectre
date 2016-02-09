@@ -1,6 +1,6 @@
 class Run < ActiveRecord::Base
   belongs_to :suite
-  has_many :tests
+  has_many :tests, dependent: :destroy
   acts_as_sequenced scope: :suite_id
 
   def self.reversed
