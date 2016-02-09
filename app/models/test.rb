@@ -35,6 +35,18 @@ class Test < ActiveRecord::Base
     self.save
   end
 
+  def screenshot_thumbnail_url
+    Thumbnail.new(screenshot).url
+  end
+
+  def screenshot_baseline_thumbnail_url
+    Thumbnail.new(screenshot_baseline).url
+  end
+
+  def screenshot_diff_thumbnail_url
+    Thumbnail.new(screenshot_diff).url
+  end
+
   private
 
   def default_values
