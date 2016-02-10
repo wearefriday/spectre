@@ -49,6 +49,10 @@ An example test run can be executed using:
 
     bundle exec rake screenshots
 
+## Administration
+
+Spectre doesn't provide a UI or API to edit or delete content. We've included `rails_admin`, so head to `/admin` for this. By default there is no password.
+
 ## TODO
 
 * refactor to remove code from fat controllers
