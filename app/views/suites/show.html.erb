@@ -55,7 +55,7 @@
         <td><%= test.browser %></td>
         <td><%= test.platform %></td>
         <td><%= test.width %></td>
-        <td><%= image_tag test.screenshot.url %></td>
+        <td><%= link_to(image_tag(test.screenshot_thumbnail_url), test.screenshot.url) %></td>
       </tr>
     <% end %>
   </tbody>
