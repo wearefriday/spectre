@@ -56,7 +56,6 @@ Spectre doesn't provide a UI or API to edit or delete content. We've included `r
 ## TODO
 
 * refactor to remove code from fat controllers
-* JSON output for a whole Run rather than a single test?
 * ability to get a canonical link to the baseline screenshot for a named test (e.g. ability to hotlink a screenshot into a component library)
 * test coverage is currently nil
 * upgrade to Rails 5 when released
