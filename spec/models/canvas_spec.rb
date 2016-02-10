@@ -1,7 +1,7 @@
 require 'canvas'
 
 RSpec.describe Canvas, :type => :model do
-  it 'initially sets it\'s width and height to match the base screenshot' do
+  it 'sets it\'s width and height to match the base screenshot if the screenshots are the same dimensions' do
     baseline_screenshot_details = ImageGeometry.new('spec/support/images/testcard.jpg')
     test_screenshot_details = ImageGeometry.new('spec/support/images/testcard.jpg')
     canvas = Canvas.new(baseline_screenshot_details, test_screenshot_details)
