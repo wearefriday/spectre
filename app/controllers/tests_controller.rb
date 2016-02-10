@@ -84,7 +84,7 @@ class TestsController < ApplicationController
 
     baseline_resize_command = convert_image_command(@test.screenshot_baseline.path, baseline_screenshot_tmp_path, canvas)
     test_size_command = convert_image_command(@test.screenshot.path, test_screenshot_tmp_path, canvas)
-    compare_command = compare_images_command(baseline_screenshot_tmp_path, test_screenshot_tmp_path, diff_screenshot_tmp_path, '20%', 'red')
+    compare_command = compare_images_command(baseline_screenshot_tmp_path, test_screenshot_tmp_path, diff_screenshot_tmp_path, '30%', 'red')
 
     # run all commands in serial
     compare_result = Open3.popen3("#{baseline_resize_command} && #{test_size_command} && #{compare_command}") { |_stdin, _stdout, stderr, _wait_thr| stderr.read }
