@@ -99,7 +99,7 @@ class TestsController < ApplicationController
       # should probably raise an error here
     end
 
-    if @test.pass== true && @test.baseline == false
+    if @test.pass == true && @test.baseline == false
       # don't store screenshots for passing tests that aren't baselines
       @test.screenshot = nil
       @test.screenshot_baseline = nil
@@ -112,6 +112,11 @@ class TestsController < ApplicationController
     end
 
     @test.save
+
+    begin
+      @test.create_thumbnails
+    rescue
+    end
 
     # remove the temporary files
     File.delete(test_screenshot_tmp_path)
