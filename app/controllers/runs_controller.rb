@@ -8,6 +8,13 @@ class RunsController < ApplicationController
 
     params[:result] = 'Failed' if params[:result].blank?
     @test_filters = TestFilters.new(@run.tests, true, params)
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @run.to_json(:include => :tests)
+      }
+    end
   end
 
   def new
