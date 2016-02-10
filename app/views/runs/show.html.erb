@@ -1,3 +1,7 @@
+<%
+@page_title = "#{@run.suite.name} ##{@run.sequential_id} — #{@run.suite.project.name}"
+%>
+
 <ul class="breadcrumb">
   <li><%= link_to 'Projects', projects_url %></li>
   <li><%= link_to @run.suite.project.name, projects_url %></li>
