@@ -51,39 +51,16 @@ class TestsController < ApplicationController
     baseline_screenshot_details = ImageGeometry.new(@test.screenshot_baseline.path)
     test_screenshot_details = ImageGeometry.new(@test.screenshot.path)
     # create a canvas using the baseline's dimensions
-    canvas = {
-      width: baseline_screenshot_details.width,
-      height: baseline_screenshot_details.height
-    }
-
-
-    # enlarge the canvas to the wider of the two widths
-    if test_screenshot_details.width > canvas[:width]
-      canvas[:width] = test_screenshot_details.width
-      @test.dimensions_changed = true
-    end
-
-    if test_screenshot_details.width < canvas[:width]
-      @test.dimensions_changed = true
-    end
-
-    # enlarge canvas to the wider of the two heights
-    if test_screenshot_details.height > canvas[:height]
-      canvas[:height] = test_screenshot_details.height
-      @test.dimensions_changed = true
-    end
-
-    if test_screenshot_details.height < canvas[:height]
-      @test.dimensions_changed = true
-    end
+    canvas = Canvas.new(baseline_screenshot_details, test_screenshot_details)
+    @test.dimensions_changed = canvas.dimensions_differ
 
     # create temporary files to generate new canvases and diffs
     baseline_screenshot_tmp_path = File.join(Rails.root, 'tmp', "#{@test.id}_baseline.png")
     test_screenshot_tmp_path = File.join(Rails.root, 'tmp', "#{@test.id}_test.png")
     diff_screenshot_tmp_path = File.join(Rails.root, 'tmp', "#{@test.id}_diff.png")
 
-    baseline_resize_command = convert_image_command(@test.screenshot_baseline.path, baseline_screenshot_tmp_path, canvas)
-    test_size_command = convert_image_command(@test.screenshot.path, test_screenshot_tmp_path, canvas)
+    baseline_resize_command = convert_image_command(@test.screenshot_baseline.path, baseline_screenshot_tmp_path, canvas.to_h)
+    test_size_command = convert_image_command(@test.screenshot.path, test_screenshot_tmp_path, canvas.to_h)
     compare_command = compare_images_command(baseline_screenshot_tmp_path, test_screenshot_tmp_path, diff_screenshot_tmp_path, '30%', 'red')
 
     # run all commands in serial
