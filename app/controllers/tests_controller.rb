@@ -53,7 +53,7 @@ class TestsController < ApplicationController
     # create a canvas using the baseline's dimensions
     canvas = Canvas.new(baseline_screenshot_details, test_screenshot_details)
     @test.dimensions_changed = canvas.dimensions_differ
-    
+
     # create temporary files to generate new canvases and diffs
     baseline_screenshot_tmp_path = File.join(Rails.root, 'tmp', "#{@test.id}_baseline.png")
     test_screenshot_tmp_path = File.join(Rails.root, 'tmp', "#{@test.id}_test.png")
@@ -61,7 +61,7 @@ class TestsController < ApplicationController
 
     baseline_resize_command = convert_image_command(@test.screenshot_baseline.path, baseline_screenshot_tmp_path, canvas.to_h)
     test_size_command = convert_image_command(@test.screenshot.path, test_screenshot_tmp_path, canvas.to_h)
-    compare_command = compare_images_command(baseline_screenshot_tmp_path, test_screenshot_tmp_path, diff_screenshot_tmp_path, '20%', 'red')
+    compare_command = compare_images_command(baseline_screenshot_tmp_path, test_screenshot_tmp_path, diff_screenshot_tmp_path, '30%', 'red')
 
     # run all commands in serial
     compare_result = Open3.popen3("#{baseline_resize_command} && #{test_size_command} && #{compare_command}") { |_stdin, _stdout, stderr, _wait_thr| stderr.read }
@@ -76,7 +76,7 @@ class TestsController < ApplicationController
       # should probably raise an error here
     end
 
-    if @test.pass== true && @test.baseline == false
+    if @test.pass == true && @test.baseline == false
       # don't store screenshots for passing tests that aren't baselines
       @test.screenshot = nil
       @test.screenshot_baseline = nil
@@ -89,6 +89,11 @@ class TestsController < ApplicationController
     end
 
     @test.save
+
+    begin
+      @test.create_thumbnails
+    rescue
+    end
 
     # remove the temporary files
     File.delete(test_screenshot_tmp_path)
