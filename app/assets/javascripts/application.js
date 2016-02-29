@@ -25,4 +25,16 @@ $(document).on('ready page:load', function () {
     });
   });
 
+  // TODO: how is the JS being sturctured in this project?
+  // ajax ui changes 'SET AS BASELINE' button
+  $('.edit_test').on("ajax:success", function (e, data, status, xhr) {
+    var button = $(this).find("input[type='submit']");
+    button.addClass('btn-success');
+    button.prop('value', 'Success!');
+    button.prop('disabled', 'true');
+  }).on("ajax:error", function (e, xhr, status, error) {
+    var button = $(this).find("input[type='submit']");
+    button.addClass('btn-danger');
+    button.prop('value', 'Something went wrong :(');
+  });
 });

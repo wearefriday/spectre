@@ -12,7 +12,7 @@ class TestsController < ApplicationController
     @test = Test.find(params[:id])
 
     # TODO: this is implemented poorly. Should it be moved to a modal callback?
-    if params[:baseline] == 'true'
+    if params[:test][:baseline] == 'true'
       # find the baseline test for this key and unassign it as a baseline
       baseline_test = Test.find_baseline_by_key(@test.key)
       unless baseline_test.nil?
