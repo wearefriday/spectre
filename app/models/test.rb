@@ -36,21 +36,21 @@ class Test < ActiveRecord::Base
   end
 
   def create_thumbnails
-    screenshot_thumbnail_url
-    screenshot_baseline_thumbnail_url
-    screenshot_diff_thumbnail_url
+    s = screenshot_thumbnail.url
+    s = screenshot_baseline_thumbnail.url
+    s = screenshot_diff_thumbnail.url
   end
 
-  def screenshot_thumbnail_url
-    Thumbnail.new(screenshot).url
+  def screenshot_thumbnail
+    Thumbnail.new(screenshot)
   end
 
-  def screenshot_baseline_thumbnail_url
-    Thumbnail.new(screenshot_baseline).url
+  def screenshot_baseline_thumbnail
+    Thumbnail.new(screenshot_baseline)
   end
 
-  def screenshot_diff_thumbnail_url
-    Thumbnail.new(screenshot_diff).url
+  def screenshot_diff_thumbnail
+    Thumbnail.new(screenshot_diff)
   end
 
   private

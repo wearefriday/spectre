@@ -7,9 +7,9 @@
       Size: <%= test.size %>
     </small></p>
   </th>
-  <td><%= link_to(image_tag(test.screenshot_baseline_thumbnail_url), test.screenshot_baseline.url) unless test.screenshot_baseline.nil? %></td>
-  <td><%= link_to(image_tag(test.screenshot_thumbnail_url), test.screenshot.url) unless test.screenshot.nil? %></td>
-  <td><%= link_to(image_tag(test.screenshot_diff_thumbnail_url), test.screenshot_diff.url) unless test.screenshot_diff.nil? %></td>
+  <td><%= link_to(image_tag(test.screenshot_baseline_thumbnail.url, width: test.screenshot_baseline_thumbnail.width, height: test.screenshot_baseline_thumbnail.height), test.screenshot_baseline.url) unless test.screenshot_baseline.nil? %></td>
+  <td><%= link_to(image_tag(test.screenshot_thumbnail.url, width: test.screenshot_thumbnail.width, height: test.screenshot_thumbnail.height), test.screenshot.url) unless test.screenshot.nil? %></td>
+  <td><%= link_to(image_tag(test.screenshot_diff_thumbnail.url, width: test.screenshot_diff_thumbnail.width, height: test.screenshot_diff_thumbnail.height), test.screenshot_diff.url) unless test.screenshot_diff.nil? %></td>
   <td>
     <span class="label label-<%= test.pass? ? 'success' : 'danger' %>"><%= test.pass? ? 'Passed' : 'Failed' %></span>
     <% if !test.baseline && test.screenshot %>

@@ -58,8 +58,8 @@
         <th><%= test.name %></th>
         <td><%= test.browser %></td>
         <td><%= test.platform %></td>
-        <td><%= test.size %></td>
-        <td><%= link_to(image_tag(test.screenshot_thumbnail_url), test.screenshot.url) %></td>
+        <td><%= test.size %><%= test.screenshot.height %></td>
+        <td><%= link_to(image_tag(test.screenshot_thumbnail.url, width: test.screenshot_thumbnail.width, height: test.screenshot_thumbnail.height), test.screenshot.url) %></td>
       </tr>
     <% end %>
   </tbody>
