@@ -24,16 +24,19 @@ $(document).on('ready page:load', function () {
     });
   });
 
+  $('img.lazy').lazyload();
+
   // TODO: how is the JS being sturctured in this project?
   // ajax ui changes 'SET AS BASELINE' button
-  $('.edit_test').on("ajax:success", function (e, data, status, xhr) {
+  $('.edit_test').on('ajax:success', function (e, data, status, xhr) {
     var button = $(this).find("input[type='submit']");
-    button.addClass('btn-success');
-    button.prop('value', 'Success!');
-    button.prop('disabled', 'true');
-  }).on("ajax:error", function (e, xhr, status, error) {
-    var button = $(this).find("input[type='submit']");
+    var row = $(this).parents('tr:first');
+    button.hide();
+    row.removeClass('table-danger');
+    row.find('.label-danger').removeClass('label-danger').addClass('label-success').text('Passed');
+  }).on('ajax:error', function (e, xhr, status, error) {
+    var button = $(this).find('input[type="submit"]');
     button.addClass('btn-danger');
-    button.prop('value', 'Something went wrong :(');
+    button.prop('value', 'Error! Try again?');
   });
 });

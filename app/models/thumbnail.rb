@@ -5,7 +5,6 @@ class Thumbnail
 
   def initialize(asset)
     @asset = asset
-    @image_size = ImageSize.path(thumbnail_file_path).size
   end
 
   def create_thumbnail
@@ -21,11 +20,11 @@ class Thumbnail
   end
 
   def width
-    @image_size[0]
+    ImageSize.path(thumbnail_file_path).size[0]
   end
 
   def height
-    @image_size[1]
+    ImageSize.path(thumbnail_file_path).size[1]
   end
 
   def url
