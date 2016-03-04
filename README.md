@@ -60,3 +60,10 @@ Spectre doesn't provide a UI or API to edit or delete content. We've included `r
 * test coverage is currently nil
 * upgrade to Rails 5 when released
 * use ActionCable on Run::show view to update list as tests are submitted
+* disable a test if it fails more than n times (see below)
+* ability to set the "fuzz" factor on a per-test basis that overrides the default. e.g. the stat component antialiasing (http://spectre.tools.fridayengineering.net/projects/hsbc-cmb-pws/suites/components/runs/10?name=statistic&browser=&platform=&size=375&result=Failed)
+
+### Disabling a test if it fails more than N times
+Occassionaly we get a repo that has nightly tests that fail repeatedly for more than a week. In this instance we keep collecting screenshots (because we keep screenshots for failed tests). It'd be useful to be able to disable a job from within Spectre, either:
+* disable a project so that new runs cannot be created
+* configure a threshhold after which each individual tests are disabled, to reduce noise. Or auto-disable a project if there are consistent failures on every run? Would need a way to re-enable them.
