@@ -1,8 +1,9 @@
 GIT
   remote: ssh://git@git.wearefriday.com:7999/wafi/spectre_client.git
-  revision: 927e7a08a5e23683db2512c5a086f5f326659ca0
+  revision: eb446667baeca827222925243d8517a9f1d4a676
   specs:
-    spectre_client (0.1.1)
+    spectre_client (0.1.5)
+      rest-client (~> 1.8.0)
 
 GEM
   remote: https://rubygems.org/
