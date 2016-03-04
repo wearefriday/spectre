@@ -4,7 +4,7 @@
     <p><small>
       Browser: <%= test.browser %><br>
       Plaform: <%= test.platform %><br>
-      Size: <%= test.width %>
+      Size: <%= test.size %>
     </small></p>
   </th>
   <td><%= link_to(image_tag(test.screenshot_baseline_thumbnail_url), test.screenshot_baseline.url) unless test.screenshot_baseline.nil? %></td>

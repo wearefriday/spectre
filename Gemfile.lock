@@ -1,8 +1,8 @@
 GIT
   remote: ssh://git@git.wearefriday.com:7999/wafi/spectre_client.git
-  revision: eb446667baeca827222925243d8517a9f1d4a676
+  revision: 8d94908844ab7079a5725cd4fc46089b2a1ebf87
   specs:
-    spectre_client (0.1.5)
+    spectre_client (0.1.6)
       rest-client (~> 1.8.0)
 
 GEM
@@ -79,7 +79,7 @@ GEM
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
-    domain_name (0.5.25)
+    domain_name (0.5.20160216)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.0.2)
     dotenv-rails (2.0.2)
@@ -122,7 +122,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.99)
+    mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
     multi_json (1.11.2)
@@ -245,7 +245,7 @@ GEM
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.1)
+    unf_ext (0.0.7.2)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
