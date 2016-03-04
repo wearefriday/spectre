@@ -6,7 +6,7 @@ class Test < ActiveRecord::Base
   dragonfly_accessor :screenshot
   dragonfly_accessor :screenshot_baseline
   dragonfly_accessor :screenshot_diff
-  validates :name, :browser, :platform, :width, :run, presence: true
+  validates :name, :browser, :platform, :size, :run, presence: true
 
   def self.find_by_key
     where(key: key)
@@ -31,7 +31,7 @@ class Test < ActiveRecord::Base
   end
 
   def create_key
-    self.key = "#{run.suite.project.name} #{run.suite.name} #{name} #{browser} #{platform} #{width}".parameterize
+    self.key = "#{run.suite.project.name} #{run.suite.name} #{name} #{browser} #{platform} #{size}".parameterize
     self.save
   end
 

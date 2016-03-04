@@ -12,7 +12,7 @@ Given(/^there is a run with a test$/) do
           name: 'test test',
           platform: 'osx',
           browser: 'poltergiest',
-          width: '1024',
+          size: '1024',
           screenshot: File.open('features/support/screenshots/run1.png')
         }
       )
