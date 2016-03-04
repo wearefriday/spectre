@@ -1,3 +1,5 @@
+require 'image_size'
+
 class Thumbnail
   THUMBNAIL_ROOT_PATH = "system/dragonfly/#{Rails.env}/thumbnails"
 
@@ -15,6 +17,14 @@ class Thumbnail
 
   def thumbnail_file_path
     File.join(Rails.root.join('public', THUMBNAIL_ROOT_PATH), thumbnail_filename)
+  end
+
+  def width
+    ImageSize.path(thumbnail_file_path).size[0]
+  end
+
+  def height
+    ImageSize.path(thumbnail_file_path).size[1]
   end
 
   def url
