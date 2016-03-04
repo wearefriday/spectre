@@ -62,8 +62,6 @@ Spectre doesn't provide a UI or API to edit or delete content. We've included `r
 * use ActionCable on Run::show view to update list as tests are submitted
 * disable a test if it fails more than n times (see below)
 * ability to set the "fuzz" factor on a per-test basis that overrides the default. e.g. the stat component antialiasing (http://spectre.tools.fridayengineering.net/projects/hsbc-cmb-pws/suites/components/runs/10?name=statistic&browser=&platform=&size=375&result=Failed)
-* refactor "width" property of a test to be more generic "size" so that it can support form factor e.g. "mobile", "tablet". won't always be a numeric width
-* mark a test as passed when it's set as a baseline
 * ability to hide/mask specific dom elements per test which we do not control e.g. http://spectre.tools.fridayengineering.net/projects/hsbc-cmb-pws/suites/templates/runs/15?name=branch_locator&browser=&platform=&size=375&result=Failed
 
 ### Disabling a test if it fails more than N times
