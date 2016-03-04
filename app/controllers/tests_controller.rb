@@ -20,6 +20,9 @@ class TestsController < ApplicationController
         baseline_test.save
       end
 
+      # this test is now a pass!
+      @test.pass = true
+
       # set the new test as the baseline
       @test.baseline = true
       @test.save
