@@ -42,10 +42,10 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
   # for demo script only
   gem 'poltergeist'
   gem 'dotenv-rails'
+  gem 'rmagick'
   gem 'spectre_client', git: 'ssh://git@git.wearefriday.com:7999/wafi/spectre_client.git'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
