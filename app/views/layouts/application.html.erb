@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= @page_title %> — Spectre</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= @page_title %> — Spectre</title>
+    <link rel="icon" href="/favicon.gif">
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<div class="navbar navbar-dark bg-primary">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="<%= projects_url %>">Spectre</a>
+    <div class="navbar navbar-dark bg-primary">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="<%= projects_url %>">Spectre <img src="/favicon.gif" alt="" class="navbar-brand__logo"></a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="main container">
-  <%= yield %>
-</div>
+    <div class="main container">
+      <%= yield %>
+    </div>
 
-</body>
+  </body>
 </html>
