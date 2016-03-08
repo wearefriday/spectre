@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304180012) do
+ActiveRecord::Schema.define(version: 20160307143900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20160304180012) do
     t.string   "key"
     t.boolean  "dimensions_changed"
     t.boolean  "pass"
+    t.string   "url"
   end
 
   add_index "tests", ["run_id"], name: "index_tests_on_run_id", using: :btree

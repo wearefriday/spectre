@@ -91,6 +91,11 @@ GEM
       rack (>= 1.3.0)
     erubis (2.7.0)
     execjs (2.6.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.6.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
     gherkin (2.12.2)
@@ -270,6 +275,7 @@ DEPENDENCIES
   database_cleaner
   dotenv-rails
   dragonfly (~> 1.0.12)
+  factory_girl_rails (~> 4.0)
   image_size
   jbuilder (~> 2.0)
   jquery-rails
