@@ -109,7 +109,7 @@ class TestsController < ApplicationController
   private
 
   def test_params
-    params.require(:test).permit(:name, :platform, :browser, :size, :screenshot, :run_id, :url)
+    params.require(:test).permit(:name, :platform, :browser, :size, :screenshot, :run_id, :source_url)
   end
 
   def convert_image_command(input_file, output_file, canvas)
