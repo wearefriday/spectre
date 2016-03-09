@@ -8,4 +8,9 @@ RSpec.describe Test do
     test = FactoryGirl.create(:test)
     expect(test.five_consecutive_failures).to eq true
   end
+
+  it 'should have a default fuzz level of 30%' do
+    test = FactoryGirl.create(:test)
+    expect(test.fuzz_level).to eq '30%'
+  end
 end
