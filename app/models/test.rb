@@ -70,5 +70,6 @@ class Test < ActiveRecord::Base
     self.baseline ||= false
     self.dimensions_changed ||= false
     self.pass ||= false
+    self.fuzz_level = '30%' if self.fuzz_level.blank?
   end
 end
