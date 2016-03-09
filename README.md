@@ -53,6 +53,12 @@ An example test run can be executed using:
 
 Spectre doesn't provide a UI or API to edit or delete content. We've included `rails_admin`, so head to `/admin` for this. By default there is no password.
 
+## Tests
+
+[Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project.
+Test coverage is minimal but please don't follow our lead, write tests for anything you add.
+Use `rspec && rake cucumber` to run the existing tests.
+
 ## TODO
 
 * refactor to remove code from fat controllers
