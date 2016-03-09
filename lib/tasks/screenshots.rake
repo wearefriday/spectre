@@ -19,7 +19,7 @@ if Rails.env.development?
     screenshot_file = 'homepage.png'
     page.save_screenshot(screenshot_file)
     puts "Saved screenshot #{screenshot_file}"
-    spectre.submit_test('Homepage', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'))
+    spectre.submit_test('Homepage', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'), "")
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 
@@ -30,7 +30,7 @@ if Rails.env.development?
     screenshot_file = 'gyms.png'
     page.save_screenshot(screenshot_file)
     puts "Saved screenshot #{screenshot_file}"
-    spectre.submit_test('Gyms Division', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'))
+    spectre.submit_test('Gyms Division', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'), "")
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 
@@ -41,7 +41,7 @@ if Rails.env.development?
     screenshot_file = 'about_us.png'
     page.save_screenshot(screenshot_file)
     puts "Saved screenshot #{screenshot_file}"
-    spectre.submit_test('About Us', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'))
+    spectre.submit_test('About Us', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'), "")
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 

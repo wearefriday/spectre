@@ -35,17 +35,7 @@ class TestsController < ApplicationController
     # create test and run validations
     @test = Test.create!(test_params)
 
-    # find an existing baseline screenshot for this test
-    baseline_test = Test.find_baseline_by_key(@test.key)
-
-    if baseline_test
-      # grab the existing baseline image and cache it against this test
-      @test.screenshot_baseline = baseline_test.screenshot
-    else
-      # otherwise if no baseline exists (i.e. this is the first run of this test), mark test as the baseline
-      @test.baseline = true
-      @test.screenshot_baseline = test_params[:screenshot]
-    end
+    determine_baseline_test(@test, test_params[:screenshot])
 
     # force save so that dragonfly does it persistence on the baseline image
     @test.save!
@@ -53,6 +43,7 @@ class TestsController < ApplicationController
     # get the width/height of both the baseline and the test image
     baseline_screenshot_details = ImageGeometry.new(@test.screenshot_baseline.path)
     test_screenshot_details = ImageGeometry.new(@test.screenshot.path)
+
     # create a canvas using the baseline's dimensions
     canvas = Canvas.new(baseline_screenshot_details, test_screenshot_details)
     @test.dimensions_changed = canvas.dimensions_differ
@@ -118,6 +109,21 @@ class TestsController < ApplicationController
 
   def compare_images_command(baseline_file, compare_file, diff_file, fuzz, highlight_colour)
     "compare -alpha Off -dissimilarity-threshold 1 -fuzz #{fuzz} -metric AE -highlight-color #{highlight_colour} #{baseline_file.shellescape} #{compare_file.shellescape} #{diff_file.shellescape}"
+  end
+
+  def determine_baseline_test(test, screenshot)
+    # find an existing baseline screenshot for this test
+    baseline_test = Test.find_baseline_by_key(test.key)
+
+    if baseline_test
+      # grab the existing baseline image and cache it against this test
+      test.screenshot_baseline = baseline_test.screenshot
+    else
+      # otherwise if no baseline exists (i.e. this is the first run of this test), mark test as the baseline
+      test.baseline = true
+      test.screenshot_baseline = screenshot
+    end
+
   end
 
 end
