@@ -19,7 +19,16 @@ if Rails.env.development?
     screenshot_file = 'homepage.png'
     page.save_screenshot(screenshot_file)
     puts "Saved screenshot #{screenshot_file}"
-    spectre.submit_test('Homepage', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'), "")
+
+    home_options = {
+      name: 'Homepage',
+      browser: 'Phantom',
+      platform: 'OSX',
+      size: 1024,
+      screenshot: File.new(screenshot_file, 'rb')
+    }
+    spectre.submit_test(home_options)
+
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 
@@ -30,7 +39,15 @@ if Rails.env.development?
     screenshot_file = 'gyms.png'
     page.save_screenshot(screenshot_file)
     puts "Saved screenshot #{screenshot_file}"
-    spectre.submit_test('Gyms Division', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'), "")
+
+    gym_options = {
+      name: 'Gyms Division',
+      browser: 'Phantom',
+      platform: 'OSX',
+      size: 1024,
+      screenshot: File.new(screenshot_file, 'rb')
+    }
+    spectre.submit_test(gym_options)
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 
@@ -41,7 +58,15 @@ if Rails.env.development?
     screenshot_file = 'about_us.png'
     page.save_screenshot(screenshot_file)
     puts "Saved screenshot #{screenshot_file}"
-    spectre.submit_test('About Us', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'), "")
+    about_options = {
+      name: 'Gyms Division',
+      browser: 'Phantom',
+      platform: 'OSX',
+      size: 1024,
+      screenshot: File.new(screenshot_file, 'rb'),
+      fuzz_level: '90%'
+    }
+    spectre.submit_test(about_options)
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 
@@ -62,7 +87,14 @@ if Rails.env.development?
     page.save_screenshot(screenshot_file)
     draw_on_screenshot
     puts "Saved screenshot #{screenshot_file}"
-    spectre.submit_test('Homepage', 'Phantom', 'OSX', 1024, File.new(screenshot_file, 'rb'))
+    home_options = {
+      name: 'Homepage',
+      browser: 'Phantom',
+      platform: 'OSX',
+      size: 1024,
+      screenshot: File.new(screenshot_file, 'rb')
+    }
+    spectre.submit_test(home_options)
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 
@@ -101,5 +133,4 @@ if Rails.env.development?
     gc.draw(image)
     image.write 'homepage.png'
   end
-
 end
