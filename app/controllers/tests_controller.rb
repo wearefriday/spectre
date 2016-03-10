@@ -37,21 +37,20 @@ class TestsController < ApplicationController
     determine_baseline_test(@test, test_params[:screenshot])
     # force save so that dragonfly does it persistence on the baseline image
     @test.save!
-    canvas = canvas(@test)
-    @test.dimensions_changed = canvas.dimensions_differ
     temp_paths = temp_screenshot_paths(@test)
-    compare_result = compare_images(@test, temp_paths, canvas)
+    compare_result = compare_images(@test, temp_paths)
     @test.pass = determine_pass(@test, temp_paths, compare_result)
     save_or_discard_screenshots(@test, temp_paths)
-    remove_temp_files(temp_paths)
     @test.save
+    remove_temp_files(temp_paths)
 
     # TODO: why are we rescuing this? Can we fix the problem?
     begin
       @test.create_thumbnails
     rescue
     end
-    render :json => @test.to_json
+
+    render json: @test.to_json
   end
 
   private
@@ -83,12 +82,12 @@ class TestsController < ApplicationController
 
   end
 
-  def canvas(test)
-    # get the width/height of both the baseline and the test image
-    baseline_screenshot_details = ImageGeometry.new(test.screenshot_baseline.path)
-    test_screenshot_details = ImageGeometry.new(test.screenshot.path)
+  def create_canvas(test)
     # create a canvas using the baseline's dimensions
-    Canvas.new(baseline_screenshot_details, test_screenshot_details)
+    Canvas.new(
+      ImageGeometry.new(test.screenshot_baseline.path),
+      ImageGeometry.new(test.screenshot.path)
+    )
   end
 
   def temp_screenshot_paths(test)
@@ -100,11 +99,11 @@ class TestsController < ApplicationController
     }
   end
 
-  def compare_images(test, temp_paths, canvas)
+  def compare_images(test, temp_paths)
+    canvas = create_canvas(test)
     baseline_resize_command = convert_image_command(test.screenshot_baseline.path, temp_paths[:baseline], canvas.to_h)
     test_size_command = convert_image_command(test.screenshot.path, temp_paths[:test], canvas.to_h)
     compare_command = compare_images_command(temp_paths[:baseline], temp_paths[:test], temp_paths[:diff], test.fuzz_level, 'red')
-
     # run all commands in serial
     Open3.popen3("#{baseline_resize_command} && #{test_size_command} && #{compare_command}") { |_stdin, _stdout, stderr, _wait_thr| stderr.read }
   end
