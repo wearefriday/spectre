@@ -40,28 +40,14 @@ class TestsController < ApplicationController
     # force save so that dragonfly does it persistence on the baseline image
     @test.save!
 
-    # get the width/height of both the baseline and the test image
-    baseline_screenshot_details = ImageGeometry.new(@test.screenshot_baseline.path)
-    test_screenshot_details = ImageGeometry.new(@test.screenshot.path)
-
-    # create a canvas using the baseline's dimensions
-    canvas = Canvas.new(baseline_screenshot_details, test_screenshot_details)
+    canvas = canvas(@test)
     @test.dimensions_changed = canvas.dimensions_differ
 
-    # create temporary files to generate new canvases and diffs
-    baseline_screenshot_tmp_path = File.join(Rails.root, 'tmp', "#{@test.id}_baseline.png")
-    test_screenshot_tmp_path = File.join(Rails.root, 'tmp', "#{@test.id}_test.png")
-    diff_screenshot_tmp_path = File.join(Rails.root, 'tmp', "#{@test.id}_diff.png")
-
-    baseline_resize_command = convert_image_command(@test.screenshot_baseline.path, baseline_screenshot_tmp_path, canvas.to_h)
-    test_size_command = convert_image_command(@test.screenshot.path, test_screenshot_tmp_path, canvas.to_h)
-    compare_command = compare_images_command(baseline_screenshot_tmp_path, test_screenshot_tmp_path, diff_screenshot_tmp_path, @test.fuzz_level, 'red')
-
-    # run all commands in serial
-    compare_result = Open3.popen3("#{baseline_resize_command} && #{test_size_command} && #{compare_command}") { |_stdin, _stdout, stderr, _wait_thr| stderr.read }
+    temp_paths = temp_screenshot_paths(@test)
+    compare_result = compare_images(@test, temp_paths, canvas)
 
     begin
-      img_size = ImageSize.path(diff_screenshot_tmp_path).size.inject(:*)
+      img_size = ImageSize.path(temp_paths[:diff]).size.inject(:*)
       pixel_count = (compare_result.to_f / img_size) * 100
       @test.diff = pixel_count.round(2)
       # TODO: pull out 0.1 (diff threshhold to config variable)
@@ -77,9 +63,9 @@ class TestsController < ApplicationController
       @test.screenshot_diff = nil
     else
       # assign temporary images to the test to allow dragonfly to process and persist
-      @test.screenshot = Pathname.new(test_screenshot_tmp_path)
-      @test.screenshot_baseline = Pathname.new(baseline_screenshot_tmp_path)
-      @test.screenshot_diff = Pathname.new(diff_screenshot_tmp_path)
+      @test.screenshot = Pathname.new(temp_paths[:test])
+      @test.screenshot_baseline = Pathname.new(temp_paths[:baseline])
+      @test.screenshot_diff = Pathname.new(temp_paths[:diff])
     end
 
     @test.save
@@ -89,12 +75,9 @@ class TestsController < ApplicationController
     rescue
     end
 
-    # remove the temporary files
-    File.delete(test_screenshot_tmp_path)
-    File.delete(baseline_screenshot_tmp_path)
-    File.delete(diff_screenshot_tmp_path)
+    remove_temp_files(temp_paths)
 
-    return render :json => @test.to_json
+    render :json => @test.to_json
   end
 
   private
@@ -126,4 +109,36 @@ class TestsController < ApplicationController
 
   end
 
+  def canvas(test)
+    # get the width/height of both the baseline and the test image
+    baseline_screenshot_details = ImageGeometry.new(test.screenshot_baseline.path)
+    test_screenshot_details = ImageGeometry.new(test.screenshot.path)
+    # create a canvas using the baseline's dimensions
+    Canvas.new(baseline_screenshot_details, test_screenshot_details)
+  end
+
+  def temp_screenshot_paths(test)
+    # create temporary files to generate new canvases and diffs
+    {
+      baseline: File.join(Rails.root, 'tmp', "#{test.id}_baseline.png"),
+      test: File.join(Rails.root, 'tmp', "#{test.id}_test.png"),
+      diff: File.join(Rails.root, 'tmp', "#{test.id}_diff.png")
+    }
+  end
+
+  def compare_images(test, temp_paths, canvas)
+    baseline_resize_command = convert_image_command(test.screenshot_baseline.path, temp_paths[:baseline], canvas.to_h)
+    test_size_command = convert_image_command(test.screenshot.path, temp_paths[:test], canvas.to_h)
+    compare_command = compare_images_command(temp_paths[:baseline], temp_paths[:test], temp_paths[:diff], test.fuzz_level, 'red')
+
+    # run all commands in serial
+    Open3.popen3("#{baseline_resize_command} && #{test_size_command} && #{compare_command}") { |_stdin, _stdout, stderr, _wait_thr| stderr.read }
+  end
+
+  def remove_temp_files
+    # remove the temporary files
+    File.delete(temp_paths[:test])
+    File.delete(temp_paths[:baseline])
+    File.delete(temp_paths[:diff])
+  end
 end
