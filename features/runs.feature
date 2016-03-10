@@ -1,4 +1,4 @@
-Feature: Tests for runs
+Feature: Failing tests for runs
   Background:
     Given there is a run with a failing test
     When we visit the runs page

@@ -34,49 +34,23 @@ class TestsController < ApplicationController
   def create
     # create test and run validations
     @test = Test.create!(test_params)
-
     determine_baseline_test(@test, test_params[:screenshot])
-
     # force save so that dragonfly does it persistence on the baseline image
     @test.save!
-
     canvas = canvas(@test)
     @test.dimensions_changed = canvas.dimensions_differ
-
     temp_paths = temp_screenshot_paths(@test)
     compare_result = compare_images(@test, temp_paths, canvas)
-
-    begin
-      img_size = ImageSize.path(temp_paths[:diff]).size.inject(:*)
-      pixel_count = (compare_result.to_f / img_size) * 100
-      @test.diff = pixel_count.round(2)
-      # TODO: pull out 0.1 (diff threshhold to config variable)
-      @test.pass = (@test.diff < 0.1)
-    rescue
-      # should probably raise an error here
-    end
-
-    if @test.pass == true && @test.baseline == false
-      # don't store screenshots for passing tests that aren't baselines
-      @test.screenshot = nil
-      @test.screenshot_baseline = nil
-      @test.screenshot_diff = nil
-    else
-      # assign temporary images to the test to allow dragonfly to process and persist
-      @test.screenshot = Pathname.new(temp_paths[:test])
-      @test.screenshot_baseline = Pathname.new(temp_paths[:baseline])
-      @test.screenshot_diff = Pathname.new(temp_paths[:diff])
-    end
-
+    @test.pass = determine_pass(@test, temp_paths, compare_result)
+    save_or_discard_screenshots(@test, temp_paths)
+    remove_temp_files(temp_paths)
     @test.save
 
+    # TODO: why are we rescuing this? Can we fix the problem?
     begin
       @test.create_thumbnails
     rescue
     end
-
-    remove_temp_files(temp_paths)
-
     render :json => @test.to_json
   end
 
@@ -135,7 +109,35 @@ class TestsController < ApplicationController
     Open3.popen3("#{baseline_resize_command} && #{test_size_command} && #{compare_command}") { |_stdin, _stdout, stderr, _wait_thr| stderr.read }
   end
 
-  def remove_temp_files
+  def determine_pass(test, temp_paths, compare_result)
+    begin
+      img_size = ImageSize.path(temp_paths[:diff]).size.inject(:*)
+      pixel_count = (compare_result.to_f / img_size) * 100
+      test.diff = pixel_count.round(2)
+      # TODO: pull out 0.1 (diff threshhold to config variable)
+      (@test.diff < 0.1)
+    rescue
+      # should probably raise an error here
+    end
+  end
+
+  def save_or_discard_screenshots(test, temp_paths)
+    if test.pass == true && test.baseline == false
+      # don't store screenshots for passing tests that aren't baselines
+      test.screenshot = nil
+      test.screenshot_baseline = nil
+      test.screenshot_diff = nil
+    else
+      # assign temporary images to the test to allow dragonfly to process and persist
+      test.screenshot = Pathname.new(temp_paths[:test])
+      test.screenshot_baseline = Pathname.new(temp_paths[:baseline])
+      test.screenshot_diff = Pathname.new(temp_paths[:diff])
+    end
+
+    test
+  end
+
+  def remove_temp_files(temp_paths)
     # remove the temporary files
     File.delete(temp_paths[:test])
     File.delete(temp_paths[:baseline])
