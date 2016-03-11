@@ -1,10 +1,12 @@
 FactoryGirl.define do
   factory :project do
     name 'spec_project'
+    slug 'spec_project_slug'
   end
 
   factory :suite do
     name 'spec_suite'
+    slug 'spec_suite_slug'
     project
   end
 
