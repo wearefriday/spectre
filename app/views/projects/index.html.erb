@@ -15,7 +15,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <% project.suites.each_with_index do |suite, i| %>
-      <tr>
+      <tr id="project_<%= project.id %>">
         <th><%= project.name %></th>
         <td><%= link_to suite.name, project_suite_path(suite.project, suite) %></td>
         <td><%= link_to "##{suite.latest_run.sequential_id}", project_suite_run_path(suite.project, suite, suite.latest_run) %> <span class="text-muted"><%= format_date(suite.latest_run.created_at) %></span>
