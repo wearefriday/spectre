@@ -19,6 +19,7 @@ if Rails.env.development?
     screenshot_file = 'homepage.png'
     page.save_screenshot(screenshot_file)
     puts "Saved screenshot #{screenshot_file}"
+
     home_options = {
       name: 'Homepage',
       browser: 'Phantom',
@@ -27,6 +28,7 @@ if Rails.env.development?
       screenshot: File.new(screenshot_file, 'rb')
     }
     spectre.submit_test(home_options)
+
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 
@@ -37,6 +39,7 @@ if Rails.env.development?
     screenshot_file = 'gyms.png'
     page.save_screenshot(screenshot_file)
     puts "Saved screenshot #{screenshot_file}"
+
     gym_options = {
       name: 'Gyms Division',
       browser: 'Phantom',
