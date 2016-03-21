@@ -69,3 +69,13 @@ Use `rspec && rake cucumber` to run the existing tests.
 * remove Bootstrap dependency and add better visual design
 * it'd be useful for the "Update baseline" button to anchor to page scroll when reviewing many tall screenshots (otherwise you have to scroll back up to click)
 * ability to set the diff highlight colour (e.g. if your sit is red, the default red will be useless). Set on a per-run or per-test basis? (Passed in the request, not stored as Spectre config)
+
+### Baseline model refactor
+
+Each test is given a unique compound key of its name plus size and platform. Each test stores a screenshot, the baseline that it is compared againast, plus the diff. When content changes, the latest test is marked as the new baseline (test.baseline=true). Therefore getting a list of all baselines for a suite is a case of finding all tests where baseline is true. 
+
+The tests table will grow. It would make sense to be able to purge the tests table, or configure Spectre to only store N number of runs per suite. As such it makes sense to move baselines to their own database table. So that when a test is marked as a baseline, that test is copied into the baseline table as a cache. This table would be used to generate the list of baselines on a Suite listing page.
+
+Doing this will open up the possibility of only storing N number of runs per suite. This then means we can revert the cludge that means we don't store the screenshots for passing tests (to save disk space). Therefore we can always store all screenshots for all tests, pass or fail, and we can purge old tests with inpunity.
+
+The baseline model would be almost identical to the test model insofar as it would hold the test key, the various metadata for filtering (platform, device, size), but would only need a single screenshot. A test would still hold three screenshots (inc. the baseline) so viewing the test displays an accurate representation of what it was comparing against at the time the test was run.
