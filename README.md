@@ -61,14 +61,11 @@ Use `rspec && rake cucumber` to run the existing tests.
 
 ## TODO
 
-* refactor to remove code from fat controllers
 * ability to get a canonical link to the baseline screenshot for a named test (e.g. ability to hotlink a screenshot into a component library)
-* test coverage is currently nil
 * upgrade to Rails 5 when released
 * use ActionCable on Run::show view to update list as tests are submitted
-* disable a test if it fails more than n times (see below)
-* ability to set the "fuzz" factor on a per-test basis that overrides the default. e.g. the stat component antialiasing (http://spectre.tools.fridayengineering.net/projects/hsbc-cmb-pws/suites/components/runs/10?name=statistic&browser=&platform=&size=375&result=Failed)
-* ability to hide/mask specific dom elements per test which we do not control e.g. http://spectre.tools.fridayengineering.net/projects/hsbc-cmb-pws/suites/templates/runs/15?name=branch_locator&browser=&platform=&size=375&result=Failed
+* ability to set a limit for the number of test runs to keep (which means we can keep screenshots for passing tests too, cleaner UI)
+* refactor baselines into their own model/table, one row per unique key (also store the test info here) so that tests can be blatted but the baseline screenshots and info remain
 
 ### Disabling a test if it fails more than N times
 Occassionaly we get a repo that has nightly tests that fail repeatedly for more than a week. In this instance we keep collecting screenshots (because we keep screenshots for failed tests). It'd be useful to be able to disable a job from within Spectre, either:
