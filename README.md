@@ -68,8 +68,3 @@ Use `rspec && rake cucumber` to run the existing tests.
 * refactor baselines into their own model/table, one row per unique key (also store the test info here) so that tests can be blatted but the baseline screenshots and info remain
 * remove Bootstrap dependency and add better visual design
 * it'd be useful for the "Update baseline" button to anchor to page scroll when reviewing many tall screenshots (otherwise you have to scroll back up to click)
-
-### Disabling a test if it fails more than N times
-Occassionaly we get a repo that has nightly tests that fail repeatedly for more than a week. In this instance we keep collecting screenshots (because we keep screenshots for failed tests). It'd be useful to be able to disable a job from within Spectre, either:
-* disable a project so that new runs cannot be created
-* configure a threshhold after which each individual tests are disabled, to reduce noise. Or auto-disable a project if there are consistent failures on every run? Would need a way to re-enable them.
