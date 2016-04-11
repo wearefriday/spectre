@@ -2,6 +2,7 @@ class Suite < ActiveRecord::Base
   belongs_to :project
   has_many :runs, dependent: :destroy
   has_many :tests, through: :runs, dependent: :destroy
+  has_many :baselines, dependent: :destroy
   after_initialize :create_slug
 
   def latest_run

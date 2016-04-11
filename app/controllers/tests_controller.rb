@@ -69,7 +69,7 @@ class TestsController < ApplicationController
 
   def determine_baseline_test(test, screenshot)
     # find an existing baseline screenshot for this test
-    baseline_test = Test.find_baseline_by_key(test.key)
+    baseline_test = Baseline.find_by_key(test.key)
 
     if baseline_test
       # grab the existing baseline image and cache it against this test
