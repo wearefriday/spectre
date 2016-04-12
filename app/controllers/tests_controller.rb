@@ -22,17 +22,7 @@ class TestsController < ApplicationController
   def create
     # create test and run validations
     @test = Test.create!(test_params)
-    set_baseline_screenshot(@test, test_params[:screenshot])
-    @test.save! # force save so that dragonfly does it persistence on the baseline image
-
-    temp_paths = temp_screenshot_paths(@test)
-    compare_result = compare_images(@test, temp_paths)
-    @test.pass = determine_pass(@test, temp_paths, compare_result)
-
-    save_screenshots(@test, temp_paths)
-    @test.save
-
-    remove_temp_files(temp_paths)
+    ScreenshotComparison.new(@test, test_params[:screenshot])
 
     # TODO: why are we rescuing this? Can we fix the problem?
     begin
@@ -48,6 +38,7 @@ class TestsController < ApplicationController
   def test_params
     params.require(:test).permit(:name, :platform, :browser, :size, :screenshot, :run_id, :source_url, :fuzz_level)
   end
+<<<<<<< HEAD
 
   def convert_image_command(input_file, output_file, canvas)
     "convert #{input_file.shellescape} -background white -extent #{canvas[:width]}x#{canvas[:height]} #{output_file.shellescape}"
@@ -123,4 +114,6 @@ class TestsController < ApplicationController
     File.delete(temp_paths[:baseline])
     File.delete(temp_paths[:diff])
   end
+=======
+>>>>>>> master
 end

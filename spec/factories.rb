@@ -1,3 +1,5 @@
+include ActionDispatch::TestProcess
+
 FactoryGirl.define do
   factory :project do
     name 'spec_project'
@@ -19,6 +21,7 @@ FactoryGirl.define do
     browser 'na'
     platform 'na'
     size '0'
+    screenshot { fixture_file_upload(Rails.root.join(*%w[ spec support images testcard.jpg ]), 'image/jpg') }
     run
   end
 end
