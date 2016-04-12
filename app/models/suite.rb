@@ -6,7 +6,7 @@ class Suite < ActiveRecord::Base
   after_initialize :create_slug
 
   def latest_run
-    runs.reversed.first
+    runs.order(id: :desc).first
   end
 
   def create_slug
@@ -15,5 +15,9 @@ class Suite < ActiveRecord::Base
 
   def to_param
     slug
+  end
+
+  def cleanup
+    self.runs.order(id: :desc).offset(5).destroy_all
   end
 end

@@ -28,4 +28,10 @@ class Run < ActiveRecord::Base
   def url
     Rails.application.routes.url_helpers.project_suite_run_path(self.suite.project, self.suite, self)
   end
+
+  private
+
+  def purge_old_runs
+    self.suite.cleanup
+  end
 end
