@@ -1,6 +1,7 @@
 class Test < ActiveRecord::Base
   after_initialize :default_values
   after_create :create_key
+  after_save :update_baseline
   belongs_to :run
   default_scope { order(:created_at) }
   dragonfly_accessor :screenshot
@@ -16,10 +17,6 @@ class Test < ActiveRecord::Base
     where(key: key).unscoped.order(created_at: :desc).limit(5)
   end
 
-  def self.find_baseline_by_key(key)
-    where(key: key, baseline: true).first
-  end
-
   def as_json(options)
     run = super(options)
     run[:url] = self.url
@@ -28,6 +25,10 @@ class Test < ActiveRecord::Base
 
   def pass?
     pass
+  end
+
+  def baseline?
+    Baseline.exists?(key: self.key, test_id: id)
   end
 
   def url
@@ -67,9 +68,22 @@ class Test < ActiveRecord::Base
 
   def default_values
     self.diff ||= 0
-    self.baseline ||= false
     self.dimensions_changed ||= false
     self.pass ||= false
     self.fuzz_level = '30%' if self.fuzz_level.blank?
+  end
+
+  def update_baseline
+    return unless self.pass
+    Baseline.find_or_initialize_by(key: self.key).update_attributes!(
+      key: self.key,
+      name: self.name,
+      browser: self.browser,
+      platform: self.platform,
+      size: self.size,
+      suite: self.run.suite,
+      screenshot: self.screenshot,
+      test_id: self.id
+    )
   end
 end

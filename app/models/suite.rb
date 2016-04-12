@@ -13,10 +13,6 @@ class Suite < ActiveRecord::Base
     self.slug ||= name.to_s.parameterize
   end
 
-  def baselines
-    tests.where(baseline: true)
-  end
-
   def to_param
     slug
   end

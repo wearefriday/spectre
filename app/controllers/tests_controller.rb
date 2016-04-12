@@ -13,20 +13,8 @@ class TestsController < ApplicationController
 
     # TODO: this is implemented poorly. Should it be moved to a modal callback?
     if params[:test][:baseline] == 'true'
-      # find the baseline test for this key and unassign it as a baseline
-      baseline_test = Test.find_baseline_by_key(@test.key)
-      unless baseline_test.nil?
-        baseline_test.baseline = false
-        baseline_test.save
-      end
-
-      # this test is now a pass!
       @test.pass = true
-
-      # set the new test as the baseline
-      @test.baseline = true
       @test.save
-
       redirect_to project_suite_run_url(@test.run.suite.project, @test.run.suite, @test.run)
     end
   end
@@ -34,14 +22,16 @@ class TestsController < ApplicationController
   def create
     # create test and run validations
     @test = Test.create!(test_params)
-    determine_baseline_test(@test, test_params[:screenshot])
-    # force save so that dragonfly does it persistence on the baseline image
-    @test.save!
+    set_baseline_screenshot(@test, test_params[:screenshot])
+    @test.save! # force save so that dragonfly does it persistence on the baseline image
+
     temp_paths = temp_screenshot_paths(@test)
     compare_result = compare_images(@test, temp_paths)
     @test.pass = determine_pass(@test, temp_paths, compare_result)
-    save_or_discard_screenshots(@test, temp_paths)
+
+    save_screenshots(@test, temp_paths)
     @test.save
+
     remove_temp_files(temp_paths)
 
     # TODO: why are we rescuing this? Can we fix the problem?
@@ -67,7 +57,7 @@ class TestsController < ApplicationController
     "compare -alpha Off -dissimilarity-threshold 1 -fuzz #{fuzz} -metric AE -highlight-color #{highlight_colour} #{baseline_file.shellescape} #{compare_file.shellescape} #{diff_file.shellescape}"
   end
 
-  def determine_baseline_test(test, screenshot)
+  def set_baseline_screenshot(test, screenshot)
     # find an existing baseline screenshot for this test
     baseline_test = Baseline.find_by_key(test.key)
 
@@ -75,8 +65,7 @@ class TestsController < ApplicationController
       # grab the existing baseline image and cache it against this test
       test.screenshot_baseline = baseline_test.screenshot
     else
-      # otherwise if no baseline exists (i.e. this is the first run of this test), mark test as the baseline
-      test.baseline = true
+      # otherwise compare against itself
       test.screenshot_baseline = screenshot
     end
 
@@ -120,19 +109,11 @@ class TestsController < ApplicationController
     end
   end
 
-  def save_or_discard_screenshots(test, temp_paths)
-    if test.pass == true && test.baseline == false
-      # don't store screenshots for passing tests that aren't baselines
-      test.screenshot = nil
-      test.screenshot_baseline = nil
-      test.screenshot_diff = nil
-    else
-      # assign temporary images to the test to allow dragonfly to process and persist
-      test.screenshot = Pathname.new(temp_paths[:test])
-      test.screenshot_baseline = Pathname.new(temp_paths[:baseline])
-      test.screenshot_diff = Pathname.new(temp_paths[:diff])
-    end
-
+  def save_screenshots(test, temp_paths)
+    # assign temporary images to the test to allow dragonfly to process and persist
+    test.screenshot = Pathname.new(temp_paths[:test])
+    test.screenshot_baseline = Pathname.new(temp_paths[:baseline])
+    test.screenshot_diff = Pathname.new(temp_paths[:diff])
     test
   end
 
