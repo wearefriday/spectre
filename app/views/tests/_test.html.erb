@@ -5,7 +5,6 @@
       <small>
         <%= test.browser %> (<%= test.platform %>) @ <%= test.size %>
         <%= raw "<br>#{link_to('Go to URL', test.source_url)}" unless test.source_url.blank? %>
-        <%= raw "<br>#{link_to('Baseline image', test.baseline.screenshot_url)}" if test.baseline? %>
       </small>
     </p>
   </th>

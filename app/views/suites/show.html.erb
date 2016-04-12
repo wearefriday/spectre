@@ -53,13 +53,13 @@
     </tr>
   </thead>
   <tbody>
-    <% @baselines.tests.each do |test| %>
+    <% @baselines.tests.each do |baseline| %>
       <tr>
-        <th><%= test.name %></th>
-        <td><%= test.browser %></td>
-        <td><%= test.platform %></td>
-        <td><%= test.size %></td>
-        <td><%= link_to(thumbnail(test.screenshot_thumbnail), test.screenshot.url) %></td>
+        <th><%= link_to(baseline.name, baseline.screenshot_url) %></th>
+        <td><%= baseline.browser %></td>
+        <td><%= baseline.platform %></td>
+        <td><%= baseline.size %></td>
+        <td><%= link_to(thumbnail(baseline.screenshot_thumbnail), baseline.screenshot_url) %></td>
       </tr>
     <% end %>
   </tbody>
