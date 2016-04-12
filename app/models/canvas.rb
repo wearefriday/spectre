@@ -1,35 +1,35 @@
 class Canvas
   attr_reader :width, :height, :dimensions_differ
 
-  def initialize(baseline_screenshot_details, test_screenshot_details)
-    @width = baseline_screenshot_details.width
-    @height = baseline_screenshot_details.height
+  def initialize(image_geometry, comparison_image_geometry)
+    @width = image_geometry.width
+    @height = image_geometry.height
     @dimensions_differ = false
 
-    adjust_canvas_width(test_screenshot_details)
-    adjust_canvas_height(test_screenshot_details)
+    adjust_canvas_width(comparison_image_geometry)
+    adjust_canvas_height(comparison_image_geometry)
   end
 
-  def adjust_canvas_width(test_screenshot_details)
+  def adjust_canvas_width(comparison_image_geometry)
     # enlarge the canvas to the wider of the two widths
-    if test_screenshot_details.width > @width
-      @width = test_screenshot_details.width
+    if comparison_image_geometry.width > @width
+      @width = comparison_image_geometry.width
       @dimensions_differ = true
     end
 
-    if test_screenshot_details.width < @width
+    if comparison_image_geometry.width < @width
       @dimensions_differ = true
     end
   end
 
-  def adjust_canvas_height(test_screenshot_details)
+  def adjust_canvas_height(comparison_image_geometry)
     # enlarge canvas to the higher of the two heights
-    if test_screenshot_details.height > @height
-      @height = test_screenshot_details.height
+    if comparison_image_geometry.height > @height
+      @height = comparison_image_geometry.height
       @dimensions_differ = true
     end
 
-    if test_screenshot_details.height < @height
+    if comparison_image_geometry.height < @height
       @dimensions_differ = true
     end
   end

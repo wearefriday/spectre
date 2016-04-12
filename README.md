@@ -53,18 +53,29 @@ An example test run can be executed using:
 
 Spectre doesn't provide a UI or API to edit or delete content. We've included `rails_admin`, so head to `/admin` for this. By default there is no password.
 
+## Tests
+
+[Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project.
+Test coverage is minimal but please don't follow our lead, write tests for anything you add.
+Use `rspec && rake cucumber` to run the existing tests.
+
 ## TODO
 
-* refactor to remove code from fat controllers
 * ability to get a canonical link to the baseline screenshot for a named test (e.g. ability to hotlink a screenshot into a component library)
-* test coverage is currently nil
 * upgrade to Rails 5 when released
 * use ActionCable on Run::show view to update list as tests are submitted
-* disable a test if it fails more than n times (see below)
-* ability to set the "fuzz" factor on a per-test basis that overrides the default. e.g. the stat component antialiasing (http://spectre.tools.fridayengineering.net/projects/hsbc-cmb-pws/suites/components/runs/10?name=statistic&browser=&platform=&size=375&result=Failed)
-* ability to hide/mask specific dom elements per test which we do not control e.g. http://spectre.tools.fridayengineering.net/projects/hsbc-cmb-pws/suites/templates/runs/15?name=branch_locator&browser=&platform=&size=375&result=Failed
+* ability to set a limit for the number of test runs to keep (which means we can keep screenshots for passing tests too, cleaner UI)
+* refactor baselines into their own model/table, one row per unique key (also store the test info here) so that tests can be blatted but the baseline screenshots and info remain
+* remove Bootstrap dependency and add better visual design
+* it'd be useful for the "Update baseline" button to anchor to page scroll when reviewing many tall screenshots (otherwise you have to scroll back up to click)
+* ability to set the diff highlight colour (e.g. if your sit is red, the default red will be useless). Set on a per-run or per-test basis? (Passed in the request, not stored as Spectre config)
 
-### Disabling a test if it fails more than N times
-Occassionaly we get a repo that has nightly tests that fail repeatedly for more than a week. In this instance we keep collecting screenshots (because we keep screenshots for failed tests). It'd be useful to be able to disable a job from within Spectre, either:
-* disable a project so that new runs cannot be created
-* configure a threshhold after which each individual tests are disabled, to reduce noise. Or auto-disable a project if there are consistent failures on every run? Would need a way to re-enable them.
+### Baseline model refactor
+
+Each test is given a unique compound key of its name plus size and platform. Each test stores a screenshot, the baseline that it is compared againast, plus the diff. When content changes, the latest test is marked as the new baseline (test.baseline=true). Therefore getting a list of all baselines for a suite is a case of finding all tests where baseline is true. 
+
+The tests table will grow. It would make sense to be able to purge the tests table, or configure Spectre to only store N number of runs per suite. As such it makes sense to move baselines to their own database table. So that when a test is marked as a baseline, that test is copied into the baseline table as a cache. This table would be used to generate the list of baselines on a Suite listing page.
+
+Doing this will open up the possibility of only storing N number of runs per suite. This then means we can revert the cludge that means we don't store the screenshots for passing tests (to save disk space). Therefore we can always store all screenshots for all tests, pass or fail, and we can purge old tests with inpunity.
+
+The baseline model would be almost identical to the test model insofar as it would hold the test key, the various metadata for filtering (platform, device, size), but would only need a single screenshot. A test would still hold three screenshots (inc. the baseline) so viewing the test displays an accurate representation of what it was comparing against at the time the test was run.
