@@ -4,12 +4,12 @@ class ScreenshotComparison
   attr_reader :pass
 
   def initialize(test, screenshot)
-    determine_baseline_test(test, screenshot)
+    determine_baseline_image(test, screenshot)
     image_paths = temp_screenshot_paths(test)
     compare_result = compare_images(test, image_paths)
     @pass = determine_pass(test, image_paths, compare_result)
     test.pass = @pass
-    save_or_discard_screenshots(test, image_paths)
+    save_screenshots(test, image_paths)
     remove_temp_files(image_paths)
   end
 
@@ -44,16 +44,15 @@ class ScreenshotComparison
     )
   end
 
-  def determine_baseline_test(test, screenshot)
+  def determine_baseline_image(test, screenshot)
     # find an existing baseline screenshot for this test
-    baseline_test = Test.find_baseline_by_key(test.key)
+    baseline_test = Baseline.find_by_key(test.key)
 
     if baseline_test
       # grab the existing baseline image and cache it against this test
       test.screenshot_baseline = baseline_test.screenshot
     else
-      # otherwise if no baseline exists (i.e. this is the first run of this test), mark test as the baseline
-      test.baseline = true
+      # otherwise compare against itself
       test.screenshot_baseline = screenshot
     end
     test.save!
@@ -75,19 +74,11 @@ class ScreenshotComparison
     end
   end
 
-  def save_or_discard_screenshots(test, image_paths)
-    if test.pass == true && test.baseline == false
-      # don't store screenshots for passing tests that aren't baselines
-      test.screenshot = nil
-      test.screenshot_baseline = nil
-      test.screenshot_diff = nil
-    else
-      # assign temporary images to the test to allow dragonfly to process and persist
-      test.screenshot = Pathname.new(image_paths[:test])
-      test.screenshot_baseline = Pathname.new(image_paths[:baseline])
-      test.screenshot_diff = Pathname.new(image_paths[:diff])
-    end
-
+  def save_screenshots(test, image_paths)
+    # assign temporary images to the test to allow dragonfly to process and persist
+    test.screenshot = Pathname.new(image_paths[:test])
+    test.screenshot_baseline = Pathname.new(image_paths[:baseline])
+    test.screenshot_diff = Pathname.new(image_paths[:diff])
     test.save
   end
 
