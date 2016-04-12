@@ -31,6 +31,10 @@ class Test < ActiveRecord::Base
     Baseline.exists?(key: self.key, test_id: id)
   end
 
+  def baseline
+    Baseline.where(key: self.key).first
+  end
+
   def url
     "#{run.url}#test_#{id}"
   end

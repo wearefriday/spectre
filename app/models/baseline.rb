@@ -13,7 +13,7 @@ class Baseline < ActiveRecord::Base
     Thumbnail.new(screenshot)
   end
 
-  def screenshot_baseline_thumbnail
-    Thumbnail.new(screenshot_baseline)
+  def screenshot_url
+    Rails.application.routes.url_helpers.baseline_path(key: self.key, format: 'png')
   end
 end
