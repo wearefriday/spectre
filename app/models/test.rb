@@ -68,7 +68,6 @@ class Test < ActiveRecord::Base
 
   def default_values
     self.diff ||= 0
-    self.dimensions_changed ||= false
     self.pass ||= false
     self.fuzz_level = '30%' if self.fuzz_level.blank?
   end
