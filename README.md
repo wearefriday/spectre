@@ -61,7 +61,6 @@ Use `rspec && rake cucumber` to run the existing tests.
 
 ## TODO
 
-* ability to get a canonical link to the baseline screenshot for a named test (e.g. ability to hotlink a screenshot into a component library)
 * upgrade to Rails 5 when released
 * use ActionCable on Run::show view to update list as tests are submitted
 * ability to set a limit for the number of test runs to keep (which means we can keep screenshots for passing tests too, cleaner UI)
