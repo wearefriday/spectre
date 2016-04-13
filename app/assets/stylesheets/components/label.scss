@@ -10,6 +10,10 @@
 .label--pass {
   color: colour('white');
   background-color: colour('turquoise');
+
+  &:hover {
+    background-color: colour('turquoise');
+  }
 }
 
 a.label--pass:hover {
@@ -19,6 +23,10 @@ a.label--pass:hover {
 .label--fail {
   color: colour('white');
   background-color: colour('coral-pink');
+
+  &:hover {
+    background-color: colour('coral-pink');
+  }
 }
 
 a.label--fail:hover {
@@ -28,6 +36,10 @@ a.label--fail:hover {
 .label--warning {
   color: colour('white');
   background-color: colour('yellow');
+
+  &:hover {
+    background-color: colour('yellow');
+  }
 }
 
 a.label--warning:hover {

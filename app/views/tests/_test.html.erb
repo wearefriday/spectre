@@ -1,4 +1,4 @@
-<tr id="test_<%= test.id %>" class="test <%= "table-danger" unless test.pass?  %>">
+<tr id="test_<%= test.id %>" class="test <%= "test--fail" unless test.pass?  %>">
   <th>
     <%= test.name %>
     <p>
@@ -19,7 +19,7 @@
     <% if !test.pass? && !test.baseline? %>
       <%= form_for(test, remote: true) do |f| %>
         <%= f.hidden_field :baseline, value: true %>
-        <%= f.submit 'Update baseline', class: 'btn btn-secondary btn-sm' %>
+        <%= f.submit 'Set as baseline', class: 'test__set-baseline' %>
       <% end %>
     <% end %>
   </td>

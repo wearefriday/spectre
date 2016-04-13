@@ -61,3 +61,20 @@ table {
 select {
   @include font-size('large');
 }
+
+button,
+input[type='submit'],
+input[type='button'] {
+  @include font-family('merriweather');
+  font-size: 12px;
+  color: colour('white');
+  appearance: none;
+  padding: .5em .75em;
+  cursor: pointer;
+  background-color: colour('warm-grey');
+
+  &:focus,
+  &:hover {
+    background-color: colour('dark-grey');
+  }
+}
