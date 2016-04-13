@@ -14,14 +14,13 @@
   @return map-get($colours, $name);
 }
 
-@mixin font($font-cut, $font-size, $font-weight: 'regular') {
+@mixin font($font-cut, $font-size) {
   $font-size-properties: map-get($font-sizes, $font-size);
 
   @include font-size(map-get($font-size-properties, font-size));
 
   font-family: map-get($font-families, $font-cut);
   line-height: map-get($font-size-properties, line-height);
-  font-weight: map-get($font-weights, $font-weight);
   $size: map-get($font-size-properties, font-size);
 }
 
@@ -45,7 +44,6 @@
   @if $font-size-properties {
     @include font-size(map-get($font-size-properties, font-size));
   } @else {
-    font-size: #{$size}px;
     font-size: #{$size / 10}rem;
   }
 }
