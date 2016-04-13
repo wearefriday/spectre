@@ -3,7 +3,7 @@
     <span class="test__name"><%= test.name %></span>
     <p>
       <small class="text-muted">
-        <%= test.browser %> (<%= test.platform %>) @ <%= test.size %>
+        <%= test.browser %> @ <%= test.size %>
         <%= raw "<br>#{link_to('Go to URL', test.source_url)}" unless test.source_url.blank? %>
       </small>
     </p>
