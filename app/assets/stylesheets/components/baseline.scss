@@ -1,5 +1,13 @@
 .baseline {
+  th, td {
+    padding: 3em 1em;
+  }
 
+  &:first-child {
+    th, td {
+      padding-top: .75em;
+    }
+  }
 }
 
 .baseline__name {
