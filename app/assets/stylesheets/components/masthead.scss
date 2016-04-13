@@ -1,0 +1,33 @@
+.masthead {
+  background-color: colour('deep-blue');
+  color: colour('white');
+  padding: 30px 0;
+  margin-bottom: 60px;
+}
+
+.masthead__name {
+  @include font-size('large');
+  color: colour('white');
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@keyframes masthead__logo {
+  0% {
+    transform:  translate(0, 0);
+  }
+  50% {
+    transform:  translate(0, -5px);
+  }
+  100% {
+    transform:  translate(0, 0);
+  }
+}
+
+.masthead__logo {
+  animation: masthead__logo linear 3s;
+  animation-iteration-count: infinite;
+  display: inline-block;
+  vertical-align: baseline;
+  width: 14px;
+}

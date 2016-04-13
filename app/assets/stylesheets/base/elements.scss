@@ -1,0 +1,40 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @include font('merriweather', 'medium');
+  color: colour('dark-grey');
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  @include font-size('large');
+  border-bottom: 1px solid colour('light-grey');
+  padding-bottom: .25em;
+}
+
+a {
+  color: colour('dark-grey');
+  text-decoration: underline;
+}
+
+table {
+  text-align: left;
+  width: 100%;
+
+  td, th {
+    padding: .5em;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  thead th {
+    background-color: colour('coral-pink');
+    color: colour('white');
+  }
+}

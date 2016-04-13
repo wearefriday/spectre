@@ -1,0 +1,32 @@
+$container-width: 1300px;
+
+$colours: (
+  'deep-blue': #223658,
+  'turquoise': #39d398,
+  'coral-pink': #fb3457,
+  'yellow': #ffae0c,
+  'sky': #3d5cee,
+  'warm-grey': #5f6062,
+  'dark-grey': #333333,
+  'light-grey': #dcdcd1,
+  'white': #fff,
+);
+
+$font-families: (
+  'merriweather': ('Merriweather', Georgia, serif)
+);
+
+$font-weights: (
+  'ultra-bold': (900),
+  'bold': (700),
+  'regular': (400),
+  'light': (300)
+);
+
+$font-sizes: (
+  'xsmall': (font-size: 12, line-height: 1.4),
+  'small': (font-size: 14, line-height: 1.4),
+  'medium': (font-size: 18, line-height: 1.4),
+  'large': (font-size: 24, line-height: 1.25),
+  'xlarge': (font-size: 28, line-height: 1.2)
+);

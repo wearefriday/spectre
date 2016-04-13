@@ -1,0 +1,51 @@
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@function colour($name) {
+  @return map-get($colours, $name);
+}
+
+@mixin font($font-cut, $font-size, $font-weight: 'regular') {
+  $font-size-properties: map-get($font-sizes, $font-size);
+
+  @include font-size(map-get($font-size-properties, font-size));
+
+  font-family: map-get($font-families, $font-cut);
+  line-height: map-get($font-size-properties, line-height);
+  font-weight: map-get($font-weights, $font-weight);
+  $size: map-get($font-size-properties, font-size);
+}
+
+@mixin font-family($font-cut, $important: false) {
+  $font-family: map-get($font-families, $font-cut);
+
+  @if $font-family {
+    @if $important == false {
+      font-family: $font-family;
+    } @else {
+      font-family: $font-family !important;
+    }
+  } @else {
+    @error "The font family '#{$font-cut}' does not exist in the list of font families!";
+  }
+}
+
+@mixin font-size($size) {
+  $font-size-properties: map-get($font-sizes, $size);
+
+  @if $font-size-properties {
+    @include font-size(map-get($font-size-properties, font-size));
+  } @else {
+    font-size: #{$size}px;
+    font-size: #{$size / 10}rem;
+  }
+}
