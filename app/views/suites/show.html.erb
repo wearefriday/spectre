@@ -11,10 +11,10 @@
 <h1><%= @suite.name %> <span class="text-muted">(<%= @suite.project.name %>)</span></h1>
 
 <h2>Latest runs</h2>
-<table class="table table-striped">
-  <thead class="thead-inverse">
+<table>
+  <thead>
     <tr>
-      <th>#</th>
+      <th>Run</th>
       <th>Date</th>
       <th>Result</th>
     </tr>
@@ -29,10 +29,10 @@
             <span class="label label-info">No tests</span>
           <% end %>
           <% if run.passing_tests > 0 %>
-            <span class="label label-success"><%= run.passing_tests %> passed</span>
+            <a class="label label--pass" href="<%= project_suite_run_path(run.suite.project, run.suite, run, params: { status: 'Pass' }) %>"><%= run.passing_tests %> passed</a>
           <% end %>
           <% if run.failing_tests > 0 %>
-            <span class="label label-danger"><%= run.failing_tests %> failed</span>
+            <a class="label label--fail" href="<%= project_suite_run_path(run.suite.project, run.suite, run, params: { status: 'Fail' }) %>"><%= run.failing_tests %> failed</a>
           <% end %>
         </td>
       </tr>
@@ -42,8 +42,8 @@
 
 <h2>Baselines</h2>
 <%= render 'shared/test_filters', test_filters: @baselines %>
-<table class="table table-striped">
-  <thead class="thead-inverse">
+<table>
+  <thead>
     <tr>
       <th>Test</th>
       <th>Browser</th>
@@ -54,12 +54,12 @@
   </thead>
   <tbody>
     <% @baselines.tests.each do |baseline| %>
-      <tr>
+      <tr class="baseline">
         <th><%= link_to(baseline.name, baseline.screenshot_url) %></th>
         <td><%= baseline.browser %></td>
         <td><%= baseline.platform %></td>
         <td><%= baseline.size %></td>
-        <td><%= link_to(thumbnail(baseline.screenshot_thumbnail), baseline.screenshot_url) %></td>
+        <td><%= link_to(thumbnail(baseline.screenshot_thumbnail), baseline.screenshot_url, class: 'baseline__image') %></td>
       </tr>
     <% end %>
   </tbody>

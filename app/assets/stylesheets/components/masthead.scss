@@ -7,6 +7,7 @@
 
 .masthead__name {
   @include font-size('large');
+  @include plain-link;
   color: colour('white');
   font-weight: bold;
   text-decoration: none;

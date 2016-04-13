@@ -11,30 +11,53 @@ body {
 }
 
 h1 {
+  @include font-size('xlarge');
+  font-weight: bold;
+  margin-bottom: 20px;
+
+  span {
+    font-weight: normal;
+  }
+}
+
+h2 {
   @include font-size('large');
-  border-bottom: 1px solid colour('light-grey');
-  padding-bottom: .25em;
+  margin-bottom: 10px;
 }
 
 a {
   color: colour('dark-grey');
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 2px solid colour('light-grey');
+  background-color: lighten(colour('light-grey'), 12%);
+  padding: .1em .25em;
+  transition: background-color .25s;
+
+  &:hover {
+    background-color: colour('light-grey');
+  }
 }
 
 table {
+  margin-bottom: 60px;
   text-align: left;
   width: 100%;
 
   td, th {
-    padding: .5em;
-  }
-
-  th {
-    font-weight: bold;
+    padding: .75em 1em;
+    vertical-align: top;
   }
 
   thead th {
-    background-color: colour('coral-pink');
+    background-color: colour('yellow');
     color: colour('white');
   }
+
+  tbody tr {
+    border-bottom: 1px solid colour('light-grey');
+  }
+}
+
+select {
+  @include font-size('large');
 }

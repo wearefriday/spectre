@@ -1,0 +1,32 @@
+.breadcrumb {
+  @include clearfix;
+  @include font-size('small');
+  color: colour('medium-grey');
+  margin-bottom: 20px;
+  margin-top: -20px;
+
+  li {
+    float: left;
+
+    &:after {
+      float: left;
+      content: '>';
+      display: inline-block;
+      margin: 0 .25em;
+    }
+
+    &:first-child:after {
+      display: none;
+    }
+  }
+
+  a {
+    @include plain-link;
+    color: colour('medium-grey');
+    border-bottom: 1px solid colour('medium-grey');
+
+    &:hover {
+      color: colour('dark-grey');
+    }
+  }
+}

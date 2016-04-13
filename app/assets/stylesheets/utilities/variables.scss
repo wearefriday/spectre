@@ -10,6 +10,7 @@ $colours: (
   'dark-grey': #333333,
   'light-grey': #dcdcd1,
   'white': #fff,
+  'medium-grey': lighten(#5f6062, 35%)
 );
 
 $font-families: (
@@ -28,5 +29,5 @@ $font-sizes: (
   'small': (font-size: 14, line-height: 1.4),
   'medium': (font-size: 18, line-height: 1.4),
   'large': (font-size: 24, line-height: 1.25),
-  'xlarge': (font-size: 28, line-height: 1.2)
+  'xlarge': (font-size: 32, line-height: 1.2)
 );

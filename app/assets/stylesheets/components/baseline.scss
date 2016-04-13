@@ -1,0 +1,14 @@
+.baseline {
+
+}
+
+.baseline__image {
+  @include plain-link;
+  display: inline-block;
+  width: 100%;
+
+  img {
+    display: block;
+    border: 3px solid colour('light-grey');
+  }
+}
