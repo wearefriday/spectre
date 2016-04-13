@@ -47,7 +47,6 @@
     <tr>
       <th>Test</th>
       <th>Browser</th>
-      <th>Platform</th>
       <th>Size</th>
       <th>Screenshot</th>
     </tr>
@@ -57,7 +56,6 @@
       <tr class="baseline">
         <th><%= link_to(baseline.name, baseline.screenshot_url) %></th>
         <td><%= baseline.browser %></td>
-        <td><%= baseline.platform %></td>
         <td><%= baseline.size %></td>
         <td><%= link_to(thumbnail(baseline.screenshot_thumbnail), baseline.screenshot_url, class: 'baseline__image') %></td>
       </tr>

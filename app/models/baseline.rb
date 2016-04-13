@@ -2,7 +2,7 @@ class Baseline < ActiveRecord::Base
   belongs_to :suite
   default_scope { order(:created_at) }
   dragonfly_accessor :screenshot
-  validates :key, :name, :browser, :platform, :size, :suite, presence: true
+  validates :key, :name, :browser, :size, :suite, presence: true
 
   def create_thumbnails
     s = screenshot_thumbnail.url
