@@ -55,7 +55,7 @@
   <tbody>
     <% @baselines.tests.each do |baseline| %>
       <tr class="baseline">
-        <th><%= link_to(baseline.name, baseline.screenshot_url) %></th>
+        <th><%= link_to(baseline.name, baseline.screenshot_url, class: 'baseline__name') %></th>
         <td><%= baseline.browser %></td>
         <td><%= baseline.platform %></td>
         <td><%= baseline.size %></td>

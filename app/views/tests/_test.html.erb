@@ -1,6 +1,6 @@
 <tr id="test_<%= test.id %>" class="test <%= "test--fail" unless test.pass?  %>">
   <th>
-    <%= test.name %>
+    <span class="test__name"><%= test.name %></span>
     <p>
       <small class="text-muted">
         <%= test.browser %> (<%= test.platform %>) @ <%= test.size %>

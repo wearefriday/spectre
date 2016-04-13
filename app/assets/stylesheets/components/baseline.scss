@@ -2,6 +2,10 @@
 
 }
 
+.baseline__name {
+  word-break: break-word;
+}
+
 .baseline__image {
   @include plain-link;
   display: inline-block;

@@ -2,6 +2,10 @@
 
 }
 
+.test__name {
+  word-break: break-word;
+}
+
 .test__image {
   @include plain-link;
   display: inline-block;
