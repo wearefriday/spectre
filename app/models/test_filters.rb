@@ -6,15 +6,15 @@ class TestFilters
   end
 
   def names
-    @tests.map{ |test| test.name }.uniq.sort
+    @tests.map{ |test| test.name }.uniq.sort_by(&:downcase)
   end
 
   def browsers
-    @tests.map{ |test| test.browser }.uniq.sort
+    @tests.map{ |test| test.browser }.uniq.sort_by(&:downcase)
   end
 
   def sizes
-    @tests.map{ |test| test.size }.uniq.sort
+    @tests.map{ |test| test.size }.uniq.sort_by{ |size| size.to_i}
   end
 
   def filter_by_status
