@@ -8,12 +8,13 @@
 
 .test__image {
   @include plain-link;
-  display: inline-block;
-  width: 100%;
+  display: block;
 
   img {
+    box-sizing: border-box;
     display: block;
     border: 3px solid colour('light-grey');
+    width: 300px
   }
 }
 

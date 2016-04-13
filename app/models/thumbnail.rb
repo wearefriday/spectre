@@ -8,7 +8,7 @@ class Thumbnail
   end
 
   def create_thumbnail
-    @asset.thumb('250x')
+    @asset.thumb('300x')
   end
 
   def thumbnail_filename
