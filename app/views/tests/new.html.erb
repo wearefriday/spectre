@@ -1,10 +1,10 @@
 <%= form_for @test, multipart: true, url: { action: "create" }, html: { class: "form" } do |f| %>
 
-  <%= f.text_field :run_id, value: '8' %><br>
+  <%= f.text_field :run_id, value: '147' %><br>
 
-  <%= f.text_field :name, value: 'My Test' %><br>
-  <%= f.text_field :browser, value: 'chrome' %><br>
-  <%= f.text_field :width, value: '960' %><br>
+  <%= f.text_field :name, value: 'ND' %><br>
+  <%= f.text_field :browser, value: 'Chrome' %><br>
+  <%= f.text_field :size, value: 'Desktop' %><br>
   <%= f.file_field :screenshot %><br>
 
   <%= f.submit "Create test" %>
