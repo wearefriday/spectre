@@ -2,6 +2,7 @@ class Suite < ActiveRecord::Base
   belongs_to :project
   has_many :runs, dependent: :destroy
   has_many :tests, through: :runs, dependent: :destroy
+  has_many :baselines, dependent: :destroy
   after_initialize :create_slug
 
   def latest_run
@@ -10,10 +11,6 @@ class Suite < ActiveRecord::Base
 
   def create_slug
     self.slug ||= name.to_s.parameterize
-  end
-
-  def baselines
-    tests.where(baseline: true)
   end
 
   def to_param

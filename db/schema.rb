@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309104631) do
+ActiveRecord::Schema.define(version: 20160412083100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "baselines", force: :cascade do |t|
+    t.string   "name"
+    t.string   "browser"
+    t.string   "platform"
+    t.string   "size"
+    t.integer  "suite_id"
+    t.string   "screenshot_uid"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "key"
+    t.integer  "test_id"
+  end
+
+  add_index "baselines", ["suite_id"], name: "index_baselines_on_suite_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -59,7 +74,6 @@ ActiveRecord::Schema.define(version: 20160309104631) do
     t.string   "platform"
     t.string   "size"
     t.integer  "run_id"
-    t.boolean  "baseline"
     t.float    "diff"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
@@ -67,7 +81,6 @@ ActiveRecord::Schema.define(version: 20160309104631) do
     t.string   "screenshot_baseline_uid"
     t.string   "screenshot_diff_uid"
     t.string   "key"
-    t.boolean  "dimensions_changed"
     t.boolean  "pass"
     t.string   "source_url"
     t.string   "fuzz_level"
@@ -75,6 +88,7 @@ ActiveRecord::Schema.define(version: 20160309104631) do
 
   add_index "tests", ["run_id"], name: "index_tests_on_run_id", using: :btree
 
+  add_foreign_key "baselines", "suites"
   add_foreign_key "runs", "suites"
   add_foreign_key "tests", "runs"
 end
