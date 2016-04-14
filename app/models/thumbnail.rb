@@ -3,8 +3,9 @@ require 'image_size'
 class Thumbnail
   THUMBNAIL_ROOT_PATH = "system/dragonfly/#{Rails.env}/thumbnails"
 
-  def initialize(asset)
+  def initialize(asset, key)
     @asset = asset
+    @key = key
   end
 
   def create_thumbnail
@@ -12,7 +13,7 @@ class Thumbnail
   end
 
   def thumbnail_filename
-    Digest::SHA1.hexdigest(@asset.url)
+    Digest::SHA1.hexdigest(@key)
   end
 
   def thumbnail_file_path
@@ -37,5 +38,9 @@ class Thumbnail
       end
     end
     "/#{THUMBNAIL_ROOT_PATH}/#{thumbnail_filename}"
+  end
+
+  def delete
+    File.delete(thumbnail_file_path) if File.exists?(thumbnail_file_path)
   end
 end

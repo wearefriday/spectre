@@ -1,4 +1,6 @@
 class Baseline < ActiveRecord::Base
+  after_save :create_thumbnails
+  after_destroy :delete_thumbnails
   belongs_to :suite
   default_scope { order(:created_at) }
   dragonfly_accessor :screenshot
@@ -6,11 +8,14 @@ class Baseline < ActiveRecord::Base
 
   def create_thumbnails
     s = screenshot_thumbnail.url
-    s = screenshot_baseline_thumbnail.url
+  end
+
+  def delete_thumbnails
+    screenshot_thumbnail.delete
   end
 
   def screenshot_thumbnail
-    Thumbnail.new(screenshot)
+    Thumbnail.new(screenshot, "#{key}_baseline")
   end
 
   def screenshot_url

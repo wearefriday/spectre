@@ -10,8 +10,6 @@ class TestsController < ApplicationController
 
   def update
     @test = Test.find(params[:id])
-
-    # TODO: this is implemented poorly. Should it be moved to a modal callback?
     if params[:test][:baseline] == 'true'
       @test.pass = true
       @test.save
@@ -20,16 +18,8 @@ class TestsController < ApplicationController
   end
 
   def create
-    # create test and run validations
     @test = Test.create!(test_params)
     ScreenshotComparison.new(@test, test_params[:screenshot])
-
-    # TODO: why are we rescuing this? Can we fix the problem?
-    begin
-      @test.create_thumbnails
-    rescue
-    end
-
     render json: @test.to_json
   end
 
