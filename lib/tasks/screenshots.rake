@@ -23,7 +23,6 @@ if Rails.env.development?
     home_options = {
       name: 'Homepage',
       browser: 'Phantom',
-      platform: 'OSX',
       size: 1024,
       screenshot: File.new(screenshot_file, 'rb')
     }
@@ -43,7 +42,6 @@ if Rails.env.development?
     gym_options = {
       name: 'Gyms Division',
       browser: 'Phantom',
-      platform: 'OSX',
       size: 1024,
       screenshot: File.new(screenshot_file, 'rb')
     }
@@ -61,7 +59,6 @@ if Rails.env.development?
     about_options = {
       name: 'Gyms Division',
       browser: 'Phantom',
-      platform: 'OSX',
       size: 1024,
       screenshot: File.new(screenshot_file, 'rb'),
       fuzz_level: '90%'
@@ -90,7 +87,6 @@ if Rails.env.development?
     home_options = {
       name: 'Homepage',
       browser: 'Phantom',
-      platform: 'OSX',
       size: 1024,
       screenshot: File.new(screenshot_file, 'rb')
     }

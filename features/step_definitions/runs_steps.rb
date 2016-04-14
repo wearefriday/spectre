@@ -13,7 +13,6 @@ Given(/^there is a run with a failing test$/) do
       test: {
         run_id: run.id,
         name: 'test test',
-        platform: 'osx',
         browser: 'poltergiest',
         size: '1024',
         screenshot: File.open("features/support/screenshots/#{screenshot}")

@@ -2,6 +2,7 @@ class Test < ActiveRecord::Base
   after_initialize :default_values
   after_create :create_key
   after_save :update_baseline
+  after_destroy :delete_thumbnails
   belongs_to :run
   default_scope { order(:created_at) }
   dragonfly_accessor :screenshot
@@ -45,21 +46,27 @@ class Test < ActiveRecord::Base
   end
 
   def create_thumbnails
-    s = screenshot_thumbnail.url
-    s = screenshot_baseline_thumbnail.url
-    s = screenshot_diff_thumbnail.url
+    s = screenshot_thumbnail.url unless screenshot.nil?
+    s = screenshot_baseline_thumbnail.url unless screenshot_baseline.nil?
+    s = screenshot_diff_thumbnail.url unless screenshot_diff.nil?
+  end
+
+  def delete_thumbnails
+    screenshot_thumbnail.delete
+    screenshot_baseline_thumbnail.delete
+    screenshot_diff_thumbnail.delete
   end
 
   def screenshot_thumbnail
-    Thumbnail.new(screenshot)
+    Thumbnail.new(screenshot, "#{key}_test_screenshot")
   end
 
   def screenshot_baseline_thumbnail
-    Thumbnail.new(screenshot_baseline)
+    Thumbnail.new(screenshot_baseline, "#{key}_test_screenshot_baseline")
   end
 
   def screenshot_diff_thumbnail
-    Thumbnail.new(screenshot_diff)
+    Thumbnail.new(screenshot_diff, "#{key}_test_screenshot_diff")
   end
 
   def five_consecutive_failures
