@@ -67,4 +67,3 @@ Use `rspec && rake cucumber` to run the existing tests.
 * refactor baselines into their own model/table, one row per unique key (also store the test info here) so that tests can be blatted but the baseline screenshots and info remain
 * it'd be useful for the "Update baseline" button to anchor to page scroll when reviewing many tall screenshots (otherwise you have to scroll back up to click)
 * ability to set the diff highlight colour (e.g. if your sit is red, the default red will be useless). Set on a per-run or per-test basis? (Passed in the request, not stored as Spectre config)
-* remove "Platform" from test, serves no purpose
