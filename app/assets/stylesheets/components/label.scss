@@ -1,0 +1,47 @@
+.label {
+  @include font-size('small');
+  @include plain-link;
+  display: inline-block;
+  padding: .25em .75em;
+  background-color: colour('light-grey');
+  border-radius: 5px;
+}
+
+.label--pass {
+  color: colour('white');
+  background-color: colour('turquoise');
+
+  &:hover {
+    background-color: colour('turquoise');
+  }
+}
+
+a.label--pass:hover {
+  background-color: darken(colour('turquoise'), 10%);
+}
+
+.label--fail {
+  color: colour('white');
+  background-color: colour('coral-pink');
+
+  &:hover {
+    background-color: colour('coral-pink');
+  }
+}
+
+a.label--fail:hover {
+  background-color: darken(colour('coral-pink'), 10%);
+}
+
+.label--warning {
+  color: colour('white');
+  background-color: colour('yellow');
+
+  &:hover {
+    background-color: colour('yellow');
+  }
+}
+
+a.label--warning:hover {
+  background-color: darken(colour('yellow'), 10%);
+}

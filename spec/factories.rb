@@ -19,7 +19,6 @@ FactoryGirl.define do
   factory :test do
     name 'rspec_test'
     browser 'na'
-    platform 'na'
     size '0'
     screenshot { fixture_file_upload(Rails.root.join(*%w[ spec support images testcard.jpg ]), 'image/jpg') }
     run

@@ -1,0 +1,80 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @include font('merriweather', 'medium');
+  color: colour('dark-grey');
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  @include font-size('xlarge');
+  font-weight: bold;
+  margin-bottom: 20px;
+
+  span {
+    font-weight: normal;
+  }
+}
+
+h2 {
+  @include font-size('large');
+  margin-bottom: 10px;
+}
+
+a {
+  color: colour('dark-grey');
+  text-decoration: none;
+  border-bottom: 2px solid colour('light-grey');
+  background-color: lighten(colour('light-grey'), 12%);
+  padding: .1em .25em;
+  transition: background-color .25s;
+
+  &:hover {
+    background-color: colour('light-grey');
+  }
+}
+
+table {
+  margin-bottom: 60px;
+  text-align: left;
+  width: 100%;
+
+  td, th {
+    padding: .75em 1em;
+    vertical-align: top;
+  }
+
+  thead th {
+    background-color: colour('yellow');
+    color: colour('white');
+  }
+
+  tbody tr {
+    border-bottom: 1px solid colour('light-grey');
+  }
+}
+
+select {
+  @include font-size('large');
+}
+
+button,
+input[type='submit'],
+input[type='button'] {
+  @include font-family('merriweather');
+  font-size: 12px;
+  color: colour('white');
+  appearance: none;
+  padding: .5em .75em;
+  cursor: pointer;
+  background-color: colour('warm-grey');
+
+  &:focus,
+  &:hover {
+    background-color: colour('dark-grey');
+  }
+}

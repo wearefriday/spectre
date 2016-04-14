@@ -16,7 +16,7 @@
 
 $(document).on('ready page:load', function () {
 
-  $('.test-filters').each(function() {
+  $('.filters').each(function() {
     var form = $(this).find('form');
     var select = form.find('select');
     select.on('change', function() {
@@ -32,11 +32,9 @@ $(document).on('ready page:load', function () {
     var button = $(this).find("input[type='submit']");
     var row = $(this).parents('tr:first');
     button.hide();
-    row.removeClass('table-danger');
-    row.find('.label-danger').removeClass('label-danger').addClass('label-success').text('Passed');
+    row.find('.label--fail').removeClass('label--fail').addClass('label--pass').text('Pass');
   }).on('ajax:error', function (e, xhr, status, error) {
     var button = $(this).find('input[type="submit"]');
-    button.addClass('btn-danger');
     button.prop('value', 'Error! Try again?');
   });
 });

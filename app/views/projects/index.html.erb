@@ -23,10 +23,10 @@
             <span class="label label-info">No tests</span>
           <% end %>
           <% if suite.latest_run.passing_tests > 0 %>
-            <span class="label label-success"><%= suite.latest_run.passing_tests %> passed</span>
+            <a class="label label--pass" href="<%= project_suite_run_path(suite.project, suite, suite.latest_run, params: { status: 'pass' }) %>"><%= suite.latest_run.passing_tests %> passed</a>
           <% end %>
           <% if suite.latest_run.failing_tests > 0 %>
-            <span class="label label-danger"><%= suite.latest_run.failing_tests %> failed</span>
+            <a class="label label--fail" href="<%= project_suite_run_path(suite.project, suite, suite.latest_run, params: { status: 'fail' }) %>"><%= suite.latest_run.failing_tests %> failed</a>
           <% end %>
         </td>
       </tr>

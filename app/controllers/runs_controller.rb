@@ -6,7 +6,7 @@ class RunsController < ApplicationController
     suite = project.suites.find_by_slug!(params[:suite_slug])
     @run = suite.runs.find_by_sequential_id!(params[:sequential_id])
 
-    params[:result] = 'Failed' if params[:result].blank?
+    #params[:status] = 'Fail' if params[:status].blank?
     @test_filters = TestFilters.new(@run.tests, true, params)
 
     respond_to do |format|

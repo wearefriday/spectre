@@ -1,56 +1,15 @@
-/*
- *= require_self
- */
+@import 'vendor/reset';
 
-@import "bootstrap";
+@import 'utilities/variables';
+@import 'utilities/mixins';
 
-.main {
-  margin-top: 30px;
-}
+@import 'base/elements';
+@import 'base/layout';
+@import 'base/utilities';
 
-.navbar {
-  border-radius: 0;
-}
-
-@keyframes logo-animation{
-  0% {
-    transform:  translate(0, 0);
-  }
-  50% {
-    transform:  translate(0, -3px);
-  }
-  100% {
-    transform:  translate(0, 0);
-  }
-}
-
-img.navbar-brand__logo {
-  animation: logo-animation linear 3s;
-  animation-iteration-count: infinite;
-  display: inline-block;
-  vertical-align: baseline;
-  width: 12px;
-}
-
-img {
-  max-width: 250px;
-}
-
-h1 {
-  margin-bottom: 30px;
-}
-
-h2 {
-  //margin-bottom: 20px;
-}
-
-.test-filters {
-  background: #f9f9f9;
-
-  padding: 20px;
-
-  h2 {
-    font-size: 16px;
-    font-weight: bold;
-  }
-}
+@import 'components/baseline';
+@import 'components/breadcrumb';
+@import 'components/filters';
+@import 'components/label';
+@import 'components/masthead';
+@import 'components/test';

@@ -1,25 +1,26 @@
-<tr id="test_<%= test.id %>" class="<%= "table-danger" unless test.pass?  %>">
+<tr id="test_<%= test.id %>" class="test <%= "test--fail" unless test.pass?  %>">
   <th>
-    <%= test.name %>
+    <span class="test__name"><%= test.name %></span>
     <p>
-      <small>
-        <%= test.browser %> (<%= test.platform %>) @ <%= test.size %>
+      <small class="text-muted">
+        <%= test.browser %> @ <%= test.size %>
         <%= raw "<br>#{link_to('Go to URL', test.source_url)}" unless test.source_url.blank? %>
       </small>
     </p>
   </th>
-  <td><%= link_to(thumbnail(test.screenshot_baseline_thumbnail), test.screenshot_baseline.url) unless test.screenshot_baseline.nil? %></td>
-  <td><%= link_to(thumbnail(test.screenshot_thumbnail), test.screenshot.url) unless test.screenshot.nil? %></td>
-  <td><%= link_to(thumbnail(test.screenshot_diff_thumbnail), test.screenshot_diff.url) unless test.screenshot_diff.nil? %></td>
+  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_baseline_thumbnail), test.screenshot_baseline.url, class: 'test__image') unless test.screenshot_baseline.nil? %></td>
+  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_thumbnail), test.screenshot.url, class: 'test__image') unless test.screenshot.nil? %></td>
+  <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_diff_thumbnail), test.screenshot_diff.url, class: 'test__image') unless test.screenshot_diff.nil? %></td>
   <td>
-    <span class="label label-<%= test.pass? ? 'success' : 'danger' %>"><%= test.pass? ? 'Passed' : 'Failed' %></span>
+    <span class="test__diff text-muted"><%= test.diff == 0 ? 'No' : "#{test.diff}%" %> difference</span>
+    <span class="test__status label label--<%= test.pass? ? 'pass' : 'fail' %>"><%= test.pass? ? 'Pass' : 'Fail' %></span>
     <% if test.five_consecutive_failures %>
-      <span class="label label-warning">Consistently failing test</span>
+      <span class="label label--warning">Consistently failing test</span>
     <% end %>
     <% if !test.pass? && !test.baseline? %>
       <%= form_for(test, remote: true) do |f| %>
         <%= f.hidden_field :baseline, value: true %>
-        <%= f.submit 'Update baseline', class: 'btn btn-secondary btn-sm' %>
+        <%= f.submit 'Set as baseline', class: 'test__set-baseline' %>
       <% end %>
     <% end %>
   </td>

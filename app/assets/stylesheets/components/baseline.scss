@@ -1,0 +1,27 @@
+.baseline {
+  th, td {
+    padding: 3em 1em;
+  }
+
+  &:first-child {
+    th, td {
+      padding-top: .75em;
+    }
+  }
+}
+
+.baseline__name {
+  word-break: break-word;
+}
+
+.baseline__image {
+  @include plain-link;
+  display: block;
+
+  img {
+    box-sizing: border-box;
+    display: block;
+    border: 3px solid colour('light-grey');
+    width: 300px
+  }
+}

@@ -1,0 +1,38 @@
+.test {
+  th, td {
+    padding: 3em 1em;
+  }
+
+  &:first-child {
+    th, td {
+      padding-top: .75em;
+    }
+  }
+}
+
+.test__name {
+  word-break: break-word;
+}
+
+.test__image {
+  @include plain-link;
+  display: block;
+
+  img {
+    box-sizing: border-box;
+    display: block;
+    border: 3px solid colour('light-grey');
+    width: 300px
+  }
+}
+
+.test__status {
+  margin-bottom: 5px;
+}
+
+.test__diff {
+  @include font-size('small');
+  display: block;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
