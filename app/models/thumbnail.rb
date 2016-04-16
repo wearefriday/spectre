@@ -9,7 +9,7 @@ class Thumbnail
   end
 
   def create_thumbnail
-    @asset.thumb('300x')
+    @asset.thumb('300x').encode('jpg', '-quality 90')
   end
 
   def thumbnail_filename
