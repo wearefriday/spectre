@@ -1,10 +1,9 @@
 <tr id="test_<%= test.id %>" class="test <%= "test--fail" unless test.pass?  %>">
   <th>
-    <span class="test__name"><%= test.name %></span>
+    <span class="test__name"><%= link_to_unless(test.source_url.blank?, test.name, test.source_url)  %></span>
     <p>
       <small class="text-muted">
-        <%= test.browser %> @ <%= test.size %>
-        <%= raw "<br>#{link_to('Go to URL', test.source_url)}" unless test.source_url.blank? %>
+        <%= test.browser %>, <%= test.size %>
       </small>
     </p>
   </th>
