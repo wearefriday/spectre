@@ -29,10 +29,10 @@
             <span class="label label-info">No tests</span>
           <% end %>
           <% if run.passing_tests > 0 %>
-            <a class="label label--pass" href="<%= project_suite_run_path(run.suite.project, run.suite, run, params: { status: 'Pass' }) %>"><%= run.passing_tests %> passed</a>
+            <a class="label label--pass" href="<%= project_suite_run_path(run.suite.project, run.suite, run, params: { status: 'pass' }) %>"><%= run.passing_tests %> passed</a>
           <% end %>
           <% if run.failing_tests > 0 %>
-            <a class="label label--fail" href="<%= project_suite_run_path(run.suite.project, run.suite, run, params: { status: 'Fail' }) %>"><%= run.failing_tests %> failed</a>
+            <a class="label label--fail" href="<%= project_suite_run_path(run.suite.project, run.suite, run, params: { status: 'fail' }) %>"><%= run.failing_tests %> failed</a>
           <% end %>
         </td>
       </tr>
