@@ -26,8 +26,7 @@ class TestFilters
     @tests = @tests.where(browser: @params[:browser]) unless @params[:browser].blank?
     @tests = @tests.where(size: @params[:size]) unless @params[:size].blank?
     if filter_by_status
-      @params[:status] = 'All' if @params[:status].blank?
-      @tests = @tests.where(pass: (@params[:status] == 'Pass' ? true : false)) unless @params[:status] == 'All'
+      @tests = @tests.where(pass: (@params[:status] == 'pass' ? true : false)) unless @params[:status].blank?
     end
     return @tests
   end

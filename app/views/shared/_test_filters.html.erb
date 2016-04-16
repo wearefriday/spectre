@@ -4,7 +4,7 @@
     <%= select_tag 'browser', options_for_select(test_filters.browsers, params[:browser]), include_blank: 'Browser', class: 'form-control' %>
     <%= select_tag 'size', options_for_select(test_filters.sizes, params[:size]), include_blank: 'Size', class: 'form-control' %>
     <% if test_filters.filter_by_status %>
-      <%= select_tag 'status', options_for_select(['All', 'Pass', 'Fail'], params[:status]), class: 'form-control' %>
+      <%= select_tag 'status', options_for_select([['All', ''], ['Pass', 'pass'], ['Fail', 'fail]']], params[:status]), class: 'form-control' %>
     <% end %>
   </form>
 </div>
