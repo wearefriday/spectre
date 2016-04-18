@@ -13,7 +13,8 @@ class Thumbnail
   end
 
   def thumbnail_filename
-    Digest::SHA1.hexdigest(@key)
+    #Digest::SHA1.hexdigest(@key)
+    @key
   end
 
   def thumbnail_file_path
