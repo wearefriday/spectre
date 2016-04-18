@@ -10,10 +10,6 @@ class Test < ActiveRecord::Base
   dragonfly_accessor :screenshot_diff
   validates :name, :browser, :size, :run, presence: true
 
-  def self.find_by_key
-    where(key: key)
-  end
-
   def self.find_last_five_by_key(key)
     where(key: key).unscoped.order(created_at: :desc).limit(5)
   end
