@@ -13,9 +13,9 @@
   <td>
     <span class="test__diff text-muted"><%= test.diff == 0 ? 'No' : "#{test.diff}%" %> difference</span>
     <span class="test__status label label--<%= test.pass? ? 'pass' : 'fail' %>"><%= test.pass? ? 'Pass' : 'Fail' %></span>
-    <% if test.five_consecutive_failures %>
-      <span class="label label--warning">Consistently failing test</span>
-    <% end %>
+    <%# if test.five_consecutive_failures %>
+      <!--span class="label label--warning">Consistently failing test</span-->
+    <%# end %>
     <% if !test.pass? && !test.baseline? %>
       <%= form_for(test, remote: true) do |f| %>
         <%= f.hidden_field :baseline, value: true %>
