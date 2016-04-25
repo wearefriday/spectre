@@ -54,15 +54,15 @@ class Test < ActiveRecord::Base
   end
 
   def screenshot_thumbnail
-    Thumbnail.new(screenshot, "#{key}_test_screenshot")
+    Thumbnail.new(screenshot, "#{key}_test_#{id}_screenshot")
   end
 
   def screenshot_baseline_thumbnail
-    Thumbnail.new(screenshot_baseline, "#{key}_test_screenshot_baseline")
+    Thumbnail.new(screenshot_baseline, "#{key}_test_#{id}screenshot_baseline")
   end
 
   def screenshot_diff_thumbnail
-    Thumbnail.new(screenshot_diff, "#{key}_test_screenshot_diff")
+    Thumbnail.new(screenshot_diff, "#{key}_test_#{id}screenshot_diff")
   end
 
   def five_consecutive_failures
