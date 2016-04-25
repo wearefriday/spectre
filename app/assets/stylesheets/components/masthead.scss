@@ -11,6 +11,10 @@
   color: colour('white');
   font-weight: bold;
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 @keyframes masthead__logo {
@@ -29,6 +33,7 @@
   animation: masthead__logo linear 3s;
   animation-iteration-count: infinite;
   display: inline-block;
+  margin-left: 8px;
   vertical-align: baseline;
   width: 14px;
 }
