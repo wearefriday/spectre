@@ -37,4 +37,6 @@ $(document).on('ready page:load', function () {
     var button = $(this).find('input[type="submit"]');
     button.prop('value', 'Error! Try again?');
   });
+
+  new AnchorScroll();
 });
