@@ -1,6 +1,7 @@
 .test {
   th, td {
     padding: 3em 1em;
+    position: relative;
   }
 
   &:first-child {
@@ -36,4 +37,17 @@
   display: block;
   margin-bottom: 5px;
   white-space: nowrap;
+}
+
+.test__set-baseline {
+  &--sticky {
+    position: fixed;
+    top: 10px;
+  }
+
+  &--sticky-bottom {
+    bottom: 56px;
+    position: absolute;
+    top: auto;
+  }
 }
