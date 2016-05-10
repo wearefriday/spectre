@@ -26,7 +26,7 @@ class TestsController < ApplicationController
   private
 
   def test_params
-    params.require(:test).permit(:name, :browser, :size, :screenshot, :run_id, :source_url, :fuzz_level)
+    params.require(:test).permit(:name, :browser, :size, :screenshot, :run_id, :source_url, :fuzz_level, :highlight_colour)
   end
 
 end

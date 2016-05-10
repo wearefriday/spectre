@@ -1,6 +1,8 @@
 if Rails.env.development?
   require 'capybara'
   require 'capybara/poltergeist'
+  require 'capybara/dsl'
+  require 'capybara/rspec'
   require 'rest_client'
   require 'dotenv/tasks'
   require 'spectre_client'
@@ -9,7 +11,7 @@ if Rails.env.development?
   desc "gets some screens from nuffield health"
   task :screenshots do
     spectre = SpectreClient::Client.new('Nuffield', 'Templates', "#{ENV['PROTOCOL']}#{ENV['DOMAIN_NAME']}#{ENV['PORT']}")
-    puts "Created Specture run"
+    puts "Created Spectre run"
     sleep(2)
 
     setup_poltergeist
@@ -24,7 +26,8 @@ if Rails.env.development?
       name: 'Homepage',
       browser: 'Phantom',
       size: 1024,
-      screenshot: File.new(screenshot_file, 'rb')
+      screenshot: File.new(screenshot_file, 'rb'),
+      highlight_colour: '00ff00'
     }
     spectre.submit_test(home_options)
 
@@ -61,7 +64,8 @@ if Rails.env.development?
       browser: 'Phantom',
       size: 1024,
       screenshot: File.new(screenshot_file, 'rb'),
-      fuzz_level: '90%'
+      fuzz_level: '90%',
+      highlight_colour: '00ff00'
     }
     spectre.submit_test(about_options)
     puts "Submitting #{screenshot_file}"
@@ -71,10 +75,11 @@ if Rails.env.development?
     puts "End"
   end
 
-  desc "get a grab from wearefriday.com abd draw on it to ensure it fails each test"
+  desc "get a grab from wearefriday.com and draw on it to ensure it fails each test"
+
   task :failing_test do
     spectre = SpectreClient::Client.new('We are friday', 'site', "#{ENV['PROTOCOL']}#{ENV['DOMAIN_NAME']}#{ENV['PORT']}")
-    puts "Created Specture run"
+    puts "Created Spectre run"
     sleep(2)
     setup_poltergeist
 
@@ -88,7 +93,8 @@ if Rails.env.development?
       name: 'Homepage',
       browser: 'Phantom',
       size: 1024,
-      screenshot: File.new(screenshot_file, 'rb')
+      screenshot: File.new(screenshot_file, 'rb'),
+      highlight_colour: '00ff00'
     }
     spectre.submit_test(home_options)
     puts "Submitting #{screenshot_file}"
