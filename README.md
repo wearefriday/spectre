@@ -65,4 +65,3 @@ Use `rspec && rake cucumber` to run the existing tests.
 * use ActionCable on Run::show view to update list as tests are submitted
 * ability to set a limit for the number of test runs to keep (which means we can keep screenshots for passing tests too, cleaner UI)
 * refactor baselines into their own model/table, one row per unique key (also store the test info here) so that tests can be blatted but the baseline screenshots and info remain
-* ability to set the diff highlight colour (e.g. if your sit is red, the default red will be useless). Set on a per-run or per-test basis? (Passed in the request, not stored as Spectre config)
