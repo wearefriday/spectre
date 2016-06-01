@@ -2,6 +2,9 @@
 
 Spectre is a web application to diff screenshots. It's heavily influence by [VisualReview](https://github.com/xebia/VisualReview), [BackstopJS](https://github.com/garris/BackstopJS) and [Wraith](https://github.com/BBC-News/wraith).
 
+Read more about how we use it at Friday in "[How we do visual regression testing
+](https://medium.com/friday-people/how-we-do-visual-regression-testing-af63fa8b8eb1#.hrr32z8oe)".
+
 ![Spectre!](spectre_screenshot_1.png)
 ![Spectre!](spectre_screenshot_2.png)
 
