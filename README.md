@@ -2,10 +2,12 @@
 
 Spectre is a web application to diff screenshots. It's heavily influence by [VisualReview](https://github.com/xebia/VisualReview), [BackstopJS](https://github.com/garris/BackstopJS) and [Wraith](https://github.com/BBC-News/wraith).
 
-![Spectre!](spectre_screenshot.png)
+![Spectre!](spectre_screenshot_1.png)
+![Spectre!](spectre_screenshot_2.png)
 
 ## Requirements
 
+* Ruby
 * Postgres
 * Imagemagick
 
@@ -23,7 +25,7 @@ A "test" is a screenshot and associated metadata. A test is categorised under a 
 First you should create a new "run". The JSON response will contain the `run_id` to submit with each subsequent test.
 
     POST /runs
-      project: My Projetc Name
+      project: My Project Name
       suite: My Suite Name
 
 Then you can submit a screenshot!
@@ -55,13 +57,4 @@ Spectre doesn't provide a UI or API to edit or delete content. We've included `r
 
 ## Tests
 
-[Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project.
-Test coverage is minimal but please don't follow our lead, write tests for anything you add.
-Use `rspec && rake cucumber` to run the existing tests.
-
-## TODO
-
-* upgrade to Rails 5 when released
-* use ActionCable on Run::show view to update list as tests are submitted
-* ability to set a limit for the number of test runs to keep (which means we can keep screenshots for passing tests too, cleaner UI)
-* refactor baselines into their own model/table, one row per unique key (also store the test info here) so that tests can be blatted but the baseline screenshots and info remain
+[Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project. Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rspec && rake cucumber` to run the existing tests.
