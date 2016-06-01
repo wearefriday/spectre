@@ -45,6 +45,10 @@ Then you can submit a screenshot!
 * `width` is the screenshot size
 * `screenshot` is the image itself. PNGs are preferred
 
+### Integration with Rake tasks or Cucumber
+
+Most of the time you'll want to use your own rake task to control Selenium and take screenshots, or take screenshots during cucumber step definitions. There's a handy [spectre_client gem](https://github.com/wearefriday/spectre_client) to upload screenshots to your Spectre gem.
+
 ## Dummy tests
 
 An example test run can be executed using:
