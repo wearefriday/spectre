@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:wearefriday/spectre_client.git
-  revision: 298721a3caccdf04e28e6126095cc8be4a3e7651
+  revision: c111d78bd3811c63ed6d11503e950feb8bfcce5d
   specs:
-    spectre_client (0.1.86)
+    spectre_client (0.1.87)
       rest-client (~> 1.8.0)
 
 GEM
@@ -300,3 +300,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.11.2

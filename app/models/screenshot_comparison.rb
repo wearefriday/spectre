@@ -27,13 +27,13 @@ class ScreenshotComparison
     canvas = create_canvas(test)
     baseline_resize_command = convert_image_command(test.screenshot_baseline.path, image_paths[:baseline], canvas.to_h)
     test_size_command = convert_image_command(test.screenshot.path, image_paths[:test], canvas.to_h)
-    compare_command = compare_images_command(image_paths[:baseline], image_paths[:test], image_paths[:diff], test.fuzz_level, 'red')
+    compare_command = compare_images_command(image_paths[:baseline], image_paths[:test], image_paths[:diff], test.fuzz_level, test.highlight_colour)
     # run all commands in serial
     Open3.popen3("#{baseline_resize_command} && #{test_size_command} && #{compare_command}") { |_stdin, _stdout, stderr, _wait_thr| stderr.read }
   end
 
   def compare_images_command(baseline_file, compare_file, diff_file, fuzz, highlight_colour)
-    "compare -alpha Off -dissimilarity-threshold 1 -fuzz #{fuzz} -metric AE -highlight-color #{highlight_colour} #{baseline_file.shellescape} #{compare_file.shellescape} #{diff_file.shellescape}"
+    "compare -alpha Off -dissimilarity-threshold 1 -fuzz #{fuzz} -metric AE -highlight-color '##{highlight_colour}' #{baseline_file.shellescape} #{compare_file.shellescape} #{diff_file.shellescape}"
   end
 
   def create_canvas(test)
