@@ -3,6 +3,7 @@ development:
   encoding: utf8
   database: spectre_development
   pool: 5
+  host: db
   username:
   password:
 
@@ -11,6 +12,7 @@ production:
   encoding: utf8
   database: wafi-spectre
   pool: 5
+  host: db
   username: deploy
   port: 5432
 
@@ -19,6 +21,7 @@ test: &test
   encoding: utf8
   database: spectre_test
   pool: 5
+  host: db
   username:
   password:
 

@@ -1,0 +1,17 @@
+version: "2"
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    env_file:
+      - '.env.example'
+    command: bundle exec rails s -b '0.0.0.0'
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "5432"

@@ -17,6 +17,6 @@ public/system/dragonfly
 /log/*
 !/log/.keep
 /tmp
-
+.idea
 .env
 .byebug_history

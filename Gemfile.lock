@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:wearefriday/spectre_client.git
+  remote: git://github.com/wearefriday/spectre_client.git
   revision: c111d78bd3811c63ed6d11503e950feb8bfcce5d
   specs:
     spectre_client (0.1.87)
