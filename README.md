@@ -18,6 +18,10 @@ Spectre is a web application to diff screenshots. It's heavily influence by [Vis
 * `bundle exec rails s`
 * Copy `.env.example` and rename to `.env`. Change the url details if you need to.
 
+Alternatively:
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Submitting tests
 
 A "test" is a screenshot and associated metadata. A test is categorised under a Project, which in turn has (test) Suites. A test is submitted and associated with a "run" of a suite.
