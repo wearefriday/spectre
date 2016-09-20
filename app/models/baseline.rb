@@ -7,6 +7,7 @@ class Baseline < ActiveRecord::Base
   validates :key, :name, :browser, :size, :suite, presence: true
 
   def create_thumbnails
+    delete_thumbnails # remove any existing thumbnail for when baselines change
     s = screenshot_thumbnail.url
   end
 
