@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @projects.each do |project| %>
+    <% @projects.includes(:suites).each do |project| %>
       <% project.suites.each_with_index do |suite, i| %>
       <tr id="project_<%= project.id %>">
         <th><%= project.name %></th>
