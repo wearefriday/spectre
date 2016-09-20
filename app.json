@@ -1,0 +1,27 @@
+{
+  "name": "Spectre",
+  "description": "A web application to diff screenshots",
+  "keywords": [
+    "testing",
+    "ui"
+  ],
+  "repository": "https://github.com/wearefriday/spectre",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:create && bundle exec rake db:schema:load"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "image": "heroku/ruby",
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ]
+}
