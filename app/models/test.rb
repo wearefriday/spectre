@@ -77,6 +77,7 @@ class Test < ActiveRecord::Base
     self.diff ||= 0
     self.pass ||= false
     self.fuzz_level = '30%' if self.fuzz_level.blank?
+    self.highlight_colour = 'ff0000' if self.highlight_colour.blank?
   end
 
   def update_baseline
