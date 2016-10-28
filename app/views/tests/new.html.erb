@@ -1,10 +1,17 @@
+
 <%= form_for @test, multipart: true, url: { action: "create" }, html: { class: "form" } do |f| %>
 
-  <%= f.text_field :run_id, value: '147' %><br>
+  <%
+  project = Project.find_or_create_by(name: 'Test Project')
+  suite = project.suites.find_or_create_by(name: 'Test Suite')
+  @run = suite.runs.create
+  %>
+  <%= f.text_field :run_id, value: @run.id %><br>
 
-  <%= f.text_field :name, value: 'ND' %><br>
+  <%= f.text_field :name, value: 'My Test' %><br>
   <%= f.text_field :browser, value: 'Chrome' %><br>
   <%= f.text_field :size, value: 'Desktop' %><br>
+  <%= f.text_field :highlight_colour, placeholder: 'highlight_colour' %><br>
   <%= f.file_field :screenshot %><br>
 
   <%= f.submit "Create test" %>
