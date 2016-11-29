@@ -40,13 +40,13 @@ Then you can submit a screenshot!
         name: Homepage,
         platform: OSX,
         browser: PhantomJS,
-        width: 1024,
+        size: 1024,
         screenshot: <File>
 
 * `name` is a friendly name of your test. It should describe the template, component or state of the thing you've screenshotted
 * `platform` is the OS/platform that the screenshot was taken on (e.g. OSX, Windows, iOS, Android etc.)
 * `browser` is the browser that was used to render the screenshot. This will usually be a headless webkit such as Phantom, but if using Selenium you may have used a "real" browser
-* `width` is the screenshot size
+* `size` is the screenshot size
 * `screenshot` is the image itself. PNGs are preferred
 
 ### Integration with Rake tasks or Cucumber
