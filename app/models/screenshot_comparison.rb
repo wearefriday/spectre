@@ -48,10 +48,10 @@ class ScreenshotComparison
     # find an existing baseline screenshot for this test
     baseline_test = Baseline.find_by_key(test.key)
 
-    if baseline_test
+    begin
       # grab the existing baseline image and cache it against this test
       test.screenshot_baseline = baseline_test.screenshot
-    else
+    rescue Dragonfly::Job::Fetch::NotFound => e
       # otherwise compare against itself
       test.screenshot_baseline = screenshot
     end
