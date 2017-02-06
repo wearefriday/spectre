@@ -47,7 +47,7 @@ group :development do
   gem 'poltergeist'
   gem 'dotenv-rails'
   gem 'rmagick'
-  gem 'spectre_client', github: 'wearefriday/spectre_client'
+  gem 'spectre_client', git: 'https://github.com/wearefriday/spectre_client.git'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
