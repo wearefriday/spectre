@@ -7,14 +7,23 @@ Spectre is a web application to diff screenshots. It's heavily influenced by [Vi
 
 ## Requirements
 
-* Ruby
+* Ruby (doesn't currently work with v2.4.0)
 * Postgres
 * Imagemagick
+
+On a Mac, the easiest way to install the above, is to use [homebrew](http://brew.sh/).
+
+1. install homebrew using [these instructions](http://brew.sh/)
+1. `brew install rbenv`
+1. `rbenv install 2.3.3`
+1. `rbenv init` and follow the instructions it prints
+1. `brew install imagemagick`
+1. `brew install postgresql` and follow the instructions it prints about starting the postgresql server
 
 ## Setup
 
 * Clone the repo
-* `bundle exec rake db:create && bundle exec rake db:schema:load`
+* `bundle install && bundle exec rake db:setup`
 * `bundle exec rails s`
 * Copy `.env.example` and rename to `.env`. Change the url details if you need to.
 

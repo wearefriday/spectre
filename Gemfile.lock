@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/wearefriday/spectre_client.git
-  revision: c111d78bd3811c63ed6d11503e950feb8bfcce5d
+  remote: https://github.com/wearefriday/spectre_client.git
+  revision: a83cbca5f054e749b5b6f912bf7610437d3bd2dc
   specs:
     spectre_client (0.1.87)
       rest-client (~> 1.8.0)
@@ -122,12 +122,12 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
-    json (1.8.3)
+    json (1.8.6)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.10.0)
-    libv8 (3.16.14.13)
+    libv8 (3.16.14.17)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -241,8 +241,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    therubyracer (0.12.2)
-      libv8 (~> 3.16.14.0)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
       ref
     thor (0.19.1)
     thread_safe (0.3.5)
@@ -302,4 +302,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.11.2
+   1.14.3
