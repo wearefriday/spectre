@@ -1,26 +1,22 @@
-development:
+default: &default
   adapter: postgresql
   encoding: utf8
-  database: spectre_development
-  pool: 5
   username:
   password:
-
-production:
-  adapter: postgresql
-  encoding: utf8
-  database: wafi-spectre
   pool: 5
-  username: deploy
-  port: 5432
+  timeout: 5000
+
+development:
+  <<: *default
+  database: spectre_development
 
 test: &test
-  adapter: postgresql
-  encoding: utf8
+  <<: *default
   database: spectre_test
-  pool: 5
-  username:
-  password:
 
 cucumber:
   <<: *test
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>

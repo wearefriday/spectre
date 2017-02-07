@@ -1,17 +1,30 @@
 version: "2"
+
 services:
-  web:
+  app:
     build: .
+    ports:
+     - "3000:3000"
+    links:
+     - db
+    environment:
+      - RACK_ENV=production
+      - RAILS_SERVE_STATIC_FILES=true
+      - DATABASE_URL=postgresql://postgres@db/spectre
     volumes:
-      - .:/app
-    ports:
-      - "3000:3000"
-    env_file:
-      - '.env.example'
-    command: bundle exec rails s -b '0.0.0.0'
-    depends_on:
-      - db
+     - .:/app
+    command: bash -c "rm -f /app/tmp/pids/*.pid && rake assets:precompile && SECRET_KEY_BASE=`rake secret` rails server -b 0.0.0.0"
+
   db:
-    image: postgres
+    image: postgres:9.4
     ports:
-      - "5432"
+     - "5432"
+    volumes:
+     - .:/app
+     - .:/public
+     - data-db:/var/lib/postgresql/data
+    environment:
+     - POSTGRES_DB=spectre
+
+volumes:
+  data-db: {}
