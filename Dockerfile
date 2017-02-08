@@ -1,9 +1,8 @@
 FROM ruby:2.3
 
 WORKDIR /opt
-RUN wget -q https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+RUN curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar -jxf -
 RUN apt-get -qq update && apt-get -qq install fontconfig
-RUN tar xjf phantomjs-2.1.1-linux-x86_64.tar.bz2
 RUN ln -s /opt/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
 
 WORKDIR /app
