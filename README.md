@@ -94,6 +94,12 @@ or, if not using docker, first install [phantomjs](http://phantomjs.org/) (`brew
 
     bin/demo_test_run http://localhost:3000
 
+If you've deployed the app on heroku, you can replace the URL with the hosted one, e.g.:
+
+    docker-compose run --rm app bin/demo_test_run https://your-spectre-install.herokuapp.com
+    # or
+    bin/demo_test_run https://your-spectre-install.herokuapp.com
+
 ## Administration
 
 Spectre doesn't provide a UI or API to edit or delete content. We've included `rails_admin`, so head to `/admin` for this. By default there is no password.
