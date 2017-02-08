@@ -11,6 +11,9 @@ services:
       - RACK_ENV=production
       - RAILS_SERVE_STATIC_FILES=true
       - DATABASE_URL=postgresql://postgres@db/spectre
+      - DOMAIN_NAME=app
+      - PORT=:3000
+      - PROTOCOL=http://
     volumes:
      - .:/app
     command: bash -c "rm -f /app/tmp/pids/*.pid && rake assets:precompile && SECRET_KEY_BASE=`rake secret` rails server -b 0.0.0.0"

@@ -48,7 +48,6 @@ On a Mac, the easiest way to install the above, is to use [homebrew](http://brew
 * Clone the repo
 * `bundle install && bundle exec rake db:setup`
 * `bundle exec rails s`
-* Copy `.env.example` and rename to `.env`. Change the url details if you need to.
 
 ### Running on Heroku:
 
@@ -85,11 +84,15 @@ Then you can submit a screenshot!
 
 Most of the time you'll want to use your own rake task to control Selenium and take screenshots, or take screenshots during cucumber step definitions. There's a handy [spectre_client gem](https://github.com/wearefriday/spectre_client) to upload screenshots to your Spectre gem.
 
-## Dummy tests
+## Example test run
 
 An example test run can be executed using:
 
-    bundle exec rake screenshots
+    docker-compose run --rm app bin/demo_test_run http://app:3000
+
+or, if not using docker, first install [phantomjs](http://phantomjs.org/) (`brew install phantomjs`), then run:
+
+    bin/demo_test_run http://localhost:3000
 
 ## Administration
 
@@ -99,4 +102,5 @@ Spectre doesn't provide a UI or API to edit or delete content. We've included `r
 
 ### Tests
 
-[Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project. Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rspec && rake cucumber` to run the existing tests.
+[Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project.
+Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rspec && rake cucumber` to run the existing tests.
