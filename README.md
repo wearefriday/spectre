@@ -109,4 +109,4 @@ Spectre doesn't provide a UI or API to edit or delete content. We've included `r
 ### Tests
 
 [Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project.
-Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rspec && rake cucumber` to run the existing tests.
+Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rake` to run the existing tests.

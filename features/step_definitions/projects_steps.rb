@@ -9,5 +9,7 @@ When(/^we visit the projects page$/) do
 end
 
 Then(/^we should see the projects$/) do
-  expect(page).to have_css('#project_1')
+  within ".body" do
+    expect(page.all("tr.project").count).to eq 3
+  end
 end
