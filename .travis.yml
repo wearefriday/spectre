@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.0
+  - 2.1
+  - 2.2
+  - 2.3.3
+bundler_args: --without demo_test_run
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database spectre_test;' -U postgres
+addons:
+  postgresql: "9.4"

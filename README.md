@@ -1,5 +1,7 @@
 # Spectre
 
+[![Build Status](https://travis-ci.org/wearefriday/spectre.svg?branch=master)](https://travis-ci.org/wearefriday/spectre)
+
 Spectre is a web application to diff screenshots. It's heavily influenced by [VisualReview](https://github.com/xebia/VisualReview), [BackstopJS](https://github.com/garris/BackstopJS) and [Wraith](https://github.com/BBC-News/wraith). Read more about how we use it at Friday in our blog post: [How we do visual regression testing](https://medium.com/friday-people/how-we-do-visual-regression-testing-af63fa8b8eb1).
 
 ![Spectre!](spectre_screenshot_1.png)
@@ -109,4 +111,4 @@ Spectre doesn't provide a UI or API to edit or delete content. We've included `r
 ### Tests
 
 [Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project.
-Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rspec && rake cucumber` to run the existing tests.
+Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rake` to run the existing tests.
