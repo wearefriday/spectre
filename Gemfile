@@ -19,8 +19,6 @@ gem 'sequenced'
 gem 'dragonfly', '~> 1.0.12'
 gem 'image_size'
 
-
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -43,11 +41,14 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-  # for demo script only
-  gem 'poltergeist'
-  gem 'dotenv-rails'
-  gem 'rmagick'
-  gem 'spectre_client', git: 'https://github.com/wearefriday/spectre_client.git'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :demo_test_run do
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'rmagick'
+  gem 'rspec'
+  gem 'spectre_client', git: 'https://github.com/wearefriday/spectre_client.git'
 end

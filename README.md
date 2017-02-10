@@ -5,7 +5,30 @@ Spectre is a web application to diff screenshots. It's heavily influenced by [Vi
 ![Spectre!](spectre_screenshot_1.png)
 ![Spectre!](spectre_screenshot_2.png)
 
-## Requirements
+## Running the app
+
+You can either run the app using [docker](https://www.docker.com), or you can run it natively on your machine – there are instructions for both docker,
+and running on macOS below.
+
+Alternatively, you can run the application on [Heroku](https://www.heroku.com/).
+
+### Running using docker
+
+Install [docker](https://www.docker.com/products/docker)
+
+Setup the database (only needs to be done once):
+
+    docker-compose run --rm app bundle exec rake db:setup
+
+To run the application:
+
+    docker-compose up
+
+When you see `WEBrick::HTTPServer#start: pid=2 port=3000`, the app will be running at http://localhost:3000
+
+### Running natively on macOS
+
+#### Prerequisites
 
 * Ruby (doesn't currently work with v2.4.0)
 * Postgres
@@ -20,14 +43,13 @@ On a Mac, the easiest way to install the above, is to use [homebrew](http://brew
 1. `brew install imagemagick`
 1. `brew install postgresql` and follow the instructions it prints about starting the postgresql server
 
-## Setup
+#### Setup
 
 * Clone the repo
 * `bundle install && bundle exec rake db:setup`
 * `bundle exec rails s`
-* Copy `.env.example` and rename to `.env`. Change the url details if you need to.
 
-Alternatively:
+### Running on Heroku:
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -62,16 +84,29 @@ Then you can submit a screenshot!
 
 Most of the time you'll want to use your own rake task to control Selenium and take screenshots, or take screenshots during cucumber step definitions. There's a handy [spectre_client gem](https://github.com/wearefriday/spectre_client) to upload screenshots to your Spectre gem.
 
-## Dummy tests
+## Example test run
 
 An example test run can be executed using:
 
-    bundle exec rake screenshots
+    docker-compose run --rm app bin/demo_test_run http://app:3000
+
+or, if not using docker, first install [phantomjs](http://phantomjs.org/) (`brew install phantomjs`), then run:
+
+    bin/demo_test_run http://localhost:3000
+
+If you've deployed the app on heroku, you can replace the URL with the hosted one, e.g.:
+
+    docker-compose run --rm app bin/demo_test_run https://your-spectre-install.herokuapp.com
+    # or
+    bin/demo_test_run https://your-spectre-install.herokuapp.com
 
 ## Administration
 
 Spectre doesn't provide a UI or API to edit or delete content. We've included `rails_admin`, so head to `/admin` for this. By default there is no password.
 
-## Tests
+## Contributing
 
-[Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project. Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rspec && rake cucumber` to run the existing tests.
+### Tests
+
+[Rspec](http://rspec.info/) and [Cucumber](https://cucumber.io) are included in the project.
+Test coverage is minimal but please don't follow our lead, write tests for anything you add. Use `rspec && rake cucumber` to run the existing tests.
