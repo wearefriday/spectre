@@ -11,9 +11,5 @@ before_script:
   - psql -c 'create database spectre_test;' -U postgres
 addons:
   postgresql: "9.4"
-env:
-  global:
-  - secure: bKRHHxYX17CuLZcglIZ4xlYZT17XhZSnc9SgubCijst8Qld7WP52h7c2zxWKsLlA21i7eW+t2MYJfQraxidpPA72+W5Eq5IViTbszPDl40fhesPBJetn8VFHi8EP62fWduAYZQZ/uv+vnMpH9Bsckj1vKsDQSV5bbylbAGq2LunDVoINsSTuOH8uB7KOutBZx/4o6FzVSA1JaC875DgFKsx+PlzRrIG2X/KyB8V56ir6XWDyOxNxr1Cov4220nLyBu/dE0NQKLm7gub9vrX+Bkp4CUTQ/q9xw90ItrVU11YccUyU9kHxNr2oIo56PovbkYkT3f4ifrtKAsqGtEsUPTHsyEcK+Lv0HNuk/WL+rQekrgPo+pknl6j4HrmHZ5vuFX+ni4vUV0vUw8O5/uHy6sgZ6ttqUVwdYsSHYffZe3llSUfPej+28PZsb/eJnvpgvIOfZg/FU1CX694hVddPTdTgxwU/onhTPzvDFiuoDy+pmqR+G9V6GF+R7js6r1YKeYM8mtNGPznWsHzmVsWQ9LnppNJqNdwtghwgbd92BR/NbeTe2r10rxDCIHxuXGSnCjHrdOa6MlLSSL4pLWg0MF1SQHAEqS8wKTU9mgunoQsgpp4zursbtfEM790PNqVuUz/bflRV1+DxHceGBtBx72NKnw5ARGJPXzBpPtgLqac=
-  - secure: Z0Z6y6MwlnteeC1NrxNXKwcheHdRxXBpcGJ4JCXZOIx5OUxy9Uu3sJkiUb/X3ObZDBjh4YzEMNnP2WwcGDpuUg40uHLccm+pvOyH4S9m59KgqY96+4Ew8AxCW/aMbN3+lSoJUgEvfDu1ZbIGG8dc4r7DqSQ+FUBg42b+ApeQCg4zs+oHGWp/XB54xWSP4W2d9PoCY8wD8v95FVWMN9o+Vq9KwZrLxCk5JKu+GX19Sb1x1S/G4pLTgBNrSCPBPc5rq+m0L+DZWeSdvkmtqGBmvgKPtteTGqkyr48QQjxOD5EiK1S3ZB0U5Hk/3OV4iNRtHB79ns3gh9hXXX8sEQzmEWZlr4+MOa1Z/x+70bRPlmRTxllg7bScqL3iO31VpmFmjkdqlLqAtqwc8NGso5ICxDBTonhSEEdJDlwZUDWX1mwoqjDvSejGK2vxryyPZd7J/FjnsFDnUT9BKDUUR+xsXEvSd3bfIGFDEvQ4/m7CpGqrnQ3LjEiKnuQ+OZolZ9qCtfj707UNlSvH+W8zKqo5sIh/FHuiT9vNTCRAMEaVZFkeyVDGMSRN04XOiNwYVFii/n6vivbmRT+YURWsthH+8ntgK5Gfsk7qv5LUWaVuyoiuMwDiaZt/zvt31zcb/+NtAMgzjzOYx9MZpKdXS4D3zK/JVgNT+lh8O0etriPng3k=
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; docker build -t wearefriday/spectre .; docker push wearefriday/spectre; fi
