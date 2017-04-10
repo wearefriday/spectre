@@ -1,4 +1,5 @@
-require './lib/image_geometry'
+require 'image_size'
+require 'image_geometry'
 
 class ScreenshotComparison
   attr_reader :pass
