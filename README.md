@@ -74,13 +74,15 @@ Then you can submit a screenshot!
         platform: OSX,
         browser: PhantomJS,
         size: 1024,
-        screenshot: <File>
+        screenshot: <File>,
+        crop_area: '640x480+50+100'
 
 * `name` is a friendly name of your test. It should describe the template, component or state of the thing you've screenshotted
 * `platform` is the OS/platform that the screenshot was taken on (e.g. OSX, Windows, iOS, Android etc.)
 * `browser` is the browser that was used to render the screenshot. This will usually be a headless webkit such as Phantom, but if using Selenium you may have used a "real" browser
 * `size` is the screenshot size
 * `screenshot` is the image itself. PNGs are preferred
+* `crop_area` allows to specify a bounding box to crop from uploaded screenshot ("<width>x<height>+<top_left_x>+<top_left_y>"). If not specified, full screenshot is used for comparison. Can be used to perform visual diffs for specific page elements.
 
 ### Integration with Rake tasks or Cucumber
 

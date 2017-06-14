@@ -1,5 +1,4 @@
-require 'image_size'
-require 'image_geometry'
+require 'image_processor'
 
 class TestsController < ApplicationController
   skip_before_action :verify_authenticity_token
@@ -18,6 +17,7 @@ class TestsController < ApplicationController
   end
 
   def create
+    ImageProcessor.crop(test_params[:screenshot].path, test_params[:crop_area]) if test_params[:crop_area]
     @test = Test.create!(test_params)
     ScreenshotComparison.new(@test, test_params[:screenshot])
     render json: @test.to_json
@@ -26,7 +26,6 @@ class TestsController < ApplicationController
   private
 
   def test_params
-    params.require(:test).permit(:name, :browser, :size, :screenshot, :run_id, :source_url, :fuzz_level, :highlight_colour)
+    params.require(:test).permit(:name, :browser, :size, :screenshot, :run_id, :source_url, :fuzz_level, :highlight_colour, :crop_area)
   end
-
 end
