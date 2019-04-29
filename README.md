@@ -40,9 +40,9 @@ On a Mac, the easiest way to install the above, is to use [homebrew](http://brew
 
 1. install homebrew using [these instructions](http://brew.sh/)
 1. `brew install rbenv`
-1. `rbenv install 2.3.3`
+1. `rbenv install 2.3.8`
 1. `rbenv init` and follow the instructions it prints
-1. `brew install imagemagick`
+1. `brew install imagemagick@6`
 1. `brew install postgresql` and follow the instructions it prints about starting the postgresql server
 
 #### Setup
