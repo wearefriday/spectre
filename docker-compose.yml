@@ -20,7 +20,7 @@ services:
     command: bash -c "rm -f /app/tmp/pids/*.pid && rake assets:precompile && SECRET_KEY_BASE=`rake secret` rails server -b 0.0.0.0"
 
   db:
-    image: postgres:9.4
+    image: postgres:9.6
     ports:
      - "5432"
     volumes:
