@@ -85,7 +85,7 @@ GEM
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
-    domain_name (0.5.20160309)
+    domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     dragonfly (1.0.12)
       addressable (~> 2.3)
@@ -105,7 +105,7 @@ GEM
       activesupport (>= 4.1.0)
     haml (4.0.7)
       tilt
-    http-cookie (1.0.2)
+    http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.7.0)
     image_size (1.4.2)
@@ -123,12 +123,12 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.10.0)
-    libv8 (3.16.14.17)
+    libv8 (3.16.14.19)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.99.1)
+    mime-types (2.99.3)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
@@ -193,11 +193,11 @@ GEM
       json (~> 1.4)
     ref (2.0.0)
     remotipart (1.2.1)
-    rest-client (1.8.0)
+    rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
-    rmagick (2.15.4)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    rmagick (3.1.0)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -254,7 +254,7 @@ GEM
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.2)
+    unf_ext (0.0.7.6)
     unicorn (5.0.1)
       kgio (~> 2.6)
       rack
@@ -303,4 +303,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.14.3
+   1.17.3
