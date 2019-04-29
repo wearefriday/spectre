@@ -12,5 +12,5 @@ RUN bundle install
 
 ADD . /app
 
-EXPOSE 4000
+EXPOSE 3000
 CMD ["script/server"]

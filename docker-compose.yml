@@ -4,7 +4,7 @@ services:
   app:
     build: .
     ports:
-     - "4000:4000"
+     - "3000:3000"
     links:
      - db
     environment:
@@ -12,11 +12,11 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
       - DATABASE_URL=postgresql://postgres@db/spectre
       - DOMAIN_NAME=app
-      - PORT=:4000
+      - PORT=:3000
       - PROTOCOL=http://
     volumes:
      - .:/app
-    command: bash -c "rm -f /app/tmp/pids/*.pid && rake assets:precompile && SECRET_KEY_BASE=`rake secret` rails server -p 4000"
+    command: bash -c "rm -f /app/tmp/pids/*.pid && rake assets:precompile && SECRET_KEY_BASE=`rake secret` rails server -p 3000"
 
   db:
     image: postgres:9.4
