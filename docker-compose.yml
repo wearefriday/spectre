@@ -11,6 +11,8 @@ services:
       - RAILS_ENV=production
       - RAILS_SERVE_STATIC_FILES=true
       - DATABASE_URL=postgresql://postgres@db/spectre
+      - DATABASE_USERNAME=
+      - DATABASE_PASSWORD=
       - DOMAIN_NAME=app
       - PORT=:3000
       - PROTOCOL=http://
