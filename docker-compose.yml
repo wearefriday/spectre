@@ -2,7 +2,6 @@ version: "2"
 
 services:
   app:
-    image: wearefriday/spectre
     build: .
     ports:
      - "3000:3000"
@@ -17,7 +16,7 @@ services:
       - PROTOCOL=http://
     volumes:
      - .:/app
-    command: bash -c "rm -f /app/tmp/pids/*.pid && rake assets:precompile && SECRET_KEY_BASE=`rake secret` rails server -b 0.0.0.0"
+    command: bash -c "rm -f /app/tmp/pids/*.pid && rake assets:precompile && SECRET_KEY_BASE=`rake secret` rails server -p 3000"
 
   db:
     image: postgres:9.6
