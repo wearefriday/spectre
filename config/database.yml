@@ -19,4 +19,4 @@ cucumber:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  url: postgres://udktamttm:yQQhAGIxxwllXDJX@sst-pg10-ds1-1.cxjsifzx23qn.us-west-2.rds.amazonaws.com:5432/ds1vpszkfhn
