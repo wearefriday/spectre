@@ -13,4 +13,5 @@ RUN bundle install
 ADD . /app
 
 EXPOSE 3000
-CMD ["script/server"]
+RUN chmod +x ./start.sh
+CMD ["./start.sh"]
