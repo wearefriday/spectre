@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Run < ActiveRecord::Base
   after_create :purge_old_runs
   belongs_to :suite
@@ -14,25 +16,25 @@ class Run < ActiveRecord::Base
 
   def as_json(options)
     run = super(options)
-    run[:url] = self.url
-    return run
+    run[:url] = url
+    run
   end
 
   def passing_tests
-    self.tests.where(pass: true).count
+    tests.where(pass: true).count
   end
 
   def failing_tests
-    self.tests.where(pass: false).count
+    tests.where(pass: false).count
   end
 
   def url
-    Rails.application.routes.url_helpers.project_suite_run_path(self.suite.project, self.suite, self)
+    Rails.application.routes.url_helpers.project_suite_run_path(suite.project, suite, self)
   end
 
   private
 
   def purge_old_runs
-    self.suite.purge_old_runs
+    suite.purge_old_runs
   end
 end

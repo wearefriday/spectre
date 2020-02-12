@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Suite < ActiveRecord::Base
   belongs_to :project
   has_many :runs, dependent: :destroy
@@ -18,6 +20,6 @@ class Suite < ActiveRecord::Base
   end
 
   def purge_old_runs
-    self.runs.order(id: :desc).offset(5).destroy_all
+    runs.order(id: :desc).offset(5).destroy_all
   end
 end

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'bundler'
 Bundler.require(:demo_test_run)
@@ -17,11 +18,10 @@ end
 
 def setup_poltergeist
   Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, {
-      js_errors: false,
-      timeout: 30,
-      debug: true
-    })
+    Capybara::Poltergeist::Driver.new(app,
+                                      js_errors: false,
+                                      timeout: 30,
+                                      debug: true)
   end
 
   Capybara.configure do |config|
@@ -59,12 +59,12 @@ class DemoTestRuns
   # gets some screens from nuffield health
   def demo_run_with_screenshots
     spectre = SpectreClient::Client.new('Nuffield', 'Templates', @url)
-    puts "Created Spectre run"
+    puts 'Created Spectre run'
     sleep(2)
 
     setup_poltergeist
 
-    visit "http://www.nuffieldhealth.com/"
+    visit 'http://www.nuffieldhealth.com/'
     sleep(2)
     screenshot_file = 'homepage.png'
     page.save_screenshot(screenshot_file)
@@ -84,7 +84,7 @@ class DemoTestRuns
 
     Capybara.reset_sessions!
 
-    visit "http://www.nuffieldhealth.com/gyms/"
+    visit 'http://www.nuffieldhealth.com/gyms/'
     sleep(2)
     screenshot_file = 'gyms.png'
     page.save_screenshot(screenshot_file)
@@ -102,7 +102,7 @@ class DemoTestRuns
 
     Capybara.reset_sessions!
 
-    visit "http://www.nuffieldhealth.com/about-us/"
+    visit 'http://www.nuffieldhealth.com/about-us/'
     sleep(2)
     screenshot_file = 'about_us.png'
     page.save_screenshot(screenshot_file)
@@ -119,28 +119,28 @@ class DemoTestRuns
     puts "Submitting #{screenshot_file}"
     File.delete(screenshot_file)
 
-    puts "End"
+    puts 'End'
   end
 
   # get a grab from wearefriday.com and draw on it to ensure it fails each test
   def demo_run_with_failing_test
     spectre = SpectreClient::Client.new('We are friday', 'site', @url)
-    puts "Created Spectre run"
+    puts 'Created Spectre run'
     sleep(2)
     setup_poltergeist
 
-    visit "http://www.wearefriday.com/"
+    visit 'http://www.wearefriday.com/'
     sleep(2)
     screenshot_file = 'homepage.png'
     page.save_screenshot(screenshot_file)
     draw_on_screenshot
     puts "Saved screenshot #{screenshot_file}"
     home_options = {
-    name: 'Homepage',
-    browser: 'Phantom',
-    size: 1024,
-    screenshot: File.new(screenshot_file, 'rb'),
-    highlight_colour: '00ff00'
+      name: 'Homepage',
+      browser: 'Phantom',
+      size: 1024,
+      screenshot: File.new(screenshot_file, 'rb'),
+      highlight_colour: '00ff00'
     }
     spectre.submit_test(home_options)
     puts "Submitting #{screenshot_file}"
@@ -150,7 +150,7 @@ class DemoTestRuns
   end
 end
 
-if ARGV[1] && ARGV[1] == "fail"
+if ARGV[1] && ARGV[1] == 'fail'
   DemoTestRuns.new(url).demo_run_with_failing_test
 else
   DemoTestRuns.new(url).demo_run_with_screenshots

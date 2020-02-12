@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RunsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -9,9 +11,9 @@ class RunsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json {
-        render json: @run.to_json(:include => :tests)
-      }
+      format.json do
+        render json: @run.to_json(include: :tests)
+      end
     end
   end
 
@@ -23,6 +25,6 @@ class RunsController < ApplicationController
     project = Project.find_or_create_by(name: params[:project])
     suite = project.suites.find_or_create_by(name: params[:suite])
     @run = suite.runs.create
-    render :json => @run.to_json
+    render json: @run.to_json
   end
 end

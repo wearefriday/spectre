@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 include ActionDispatch::TestProcess
 
 FactoryGirl.define do
@@ -20,7 +22,7 @@ FactoryGirl.define do
     name 'rspec_test'
     browser 'na'
     size '0'
-    screenshot { fixture_file_upload(Rails.root.join(*%w[ spec support images testcard.jpg ]), 'image/jpg') }
+    screenshot { fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'testcard.jpg'), 'image/jpg') }
     run
   end
 end

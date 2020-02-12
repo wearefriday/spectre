@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Canvas
   attr_reader :width, :height, :dimensions_differ
 
@@ -17,9 +19,7 @@ class Canvas
       @dimensions_differ = true
     end
 
-    if comparison_image_geometry.width < @width
-      @dimensions_differ = true
-    end
+    @dimensions_differ = true if comparison_image_geometry.width < @width
   end
 
   def adjust_canvas_height(comparison_image_geometry)
@@ -29,9 +29,7 @@ class Canvas
       @dimensions_differ = true
     end
 
-    if comparison_image_geometry.height < @height
-      @dimensions_differ = true
-    end
+    @dimensions_differ = true if comparison_image_geometry.height < @height
   end
 
   def to_h
@@ -40,5 +38,4 @@ class Canvas
       height: @height
     }
   end
-
 end

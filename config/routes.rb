@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  get '/' => redirect('/projects')
+  root to: 'projects#index'
+
+  get '/auth/callback', to: 'sessions#create'
 
   resources :projects, param: :slug, only: [:index] do
     resources :suites, param: :slug, only: [:show] do
@@ -9,8 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :runs, only: [:new, :create]
-  resources :tests, only: [:update, :new, :create]
+  resources :runs, only: %i[new create]
+  resources :tests, only: %i[update new create]
 
   get '/baselines/:key', to: 'baselines#show', as: :baseline
 end

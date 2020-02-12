@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Baseline < ActiveRecord::Base
   after_save :create_thumbnails
   after_destroy :delete_thumbnails
@@ -20,6 +22,6 @@ class Baseline < ActiveRecord::Base
   end
 
   def screenshot_url
-    Rails.application.routes.url_helpers.baseline_path(key: self.key, format: 'png')
+    Rails.application.routes.url_helpers.baseline_path(key: key, format: 'png')
   end
 end

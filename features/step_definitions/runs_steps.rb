@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^there is a run with a failing test$/) do
   project = Project.create!(name: 'testproject')
   suite = project.reload.suites.create!(name: 'testsuite')

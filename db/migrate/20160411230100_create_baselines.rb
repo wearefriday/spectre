@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateBaselines < ActiveRecord::Migration
   def change
     create_table :baselines do |t|

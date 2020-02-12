@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Canvas do
   let(:baseline_screenshot_details) { ImageGeometry.new('spec/support/images/testcard.jpg') }
   let(:test_screenshot_details) { ImageGeometry.new('spec/support/images/testcard_large.jpg') }

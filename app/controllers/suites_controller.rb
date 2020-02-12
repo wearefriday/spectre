@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SuitesController < ApplicationController
   def show
     @project = Project.find_by_slug!(params[:project_slug])

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'image_size'
 require 'image_geometry'
 
@@ -69,15 +71,13 @@ class ScreenshotComparison
   end
 
   def determine_pass(test, image_paths, compare_result)
-    begin
-      img_size = ImageSize.path(image_paths[:diff]).size.inject(:*)
-      pixel_count = (compare_result.to_f / img_size) * 100
-      test.diff = pixel_count.round(2)
-      # TODO: pull out 0.1 (diff threshhold to config variable)
-      (test.diff < 0.1)
-    rescue
-      # should probably raise an error here
-    end
+    img_size = ImageSize.path(image_paths[:diff]).size.inject(:*)
+    pixel_count = (compare_result.to_f / img_size) * 100
+    test.diff = pixel_count.round(2)
+    # TODO: pull out 0.1 (diff threshhold to config variable)
+    (test.diff < 0.1)
+  rescue StandardError
+    # should probably raise an error here
   end
 
   def save_screenshots(test, image_paths)

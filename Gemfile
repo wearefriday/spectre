@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'pg'
+gem 'rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -14,10 +16,11 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'rails_admin'
-gem 'sequenced'
+gem 'dotenv-rails', groups: %i[development test]
 gem 'dragonfly', '~> 1.0.12'
 gem 'image_size'
+gem 'rails_admin'
+gem 'sequenced'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -31,9 +34,10 @@ gem 'puma'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'pry-rails'
   gem 'rest-client'
   gem 'rspec-rails'
-  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :development do

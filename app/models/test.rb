@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Test < ActiveRecord::Base
   after_initialize :default_values
   after_create :create_key
@@ -16,8 +18,8 @@ class Test < ActiveRecord::Base
 
   def as_json(options)
     run = super(options)
-    run[:url] = self.url
-    return run
+    run[:url] = url
+    run
   end
 
   def pass?
@@ -25,11 +27,11 @@ class Test < ActiveRecord::Base
   end
 
   def baseline?
-    Baseline.exists?(key: self.key, test_id: id)
+    Baseline.exists?(key: key, test_id: id)
   end
 
   def baseline
-    Baseline.where(key: self.key).first
+    Baseline.where(key: key).first
   end
 
   def url
@@ -38,7 +40,7 @@ class Test < ActiveRecord::Base
 
   def create_key
     self.key = "#{run.suite.project.name} #{run.suite.name} #{name} #{browser} #{size}".parameterize
-    self.save
+    save
   end
 
   def create_thumbnails
@@ -68,6 +70,7 @@ class Test < ActiveRecord::Base
   def five_consecutive_failures
     previous_tests = Test.find_last_five_by_key(key)
     return false if previous_tests.length < 5
+
     previous_tests.all? { |t| t.pass == false }
   end
 
@@ -76,20 +79,21 @@ class Test < ActiveRecord::Base
   def default_values
     self.diff ||= 0
     self.pass ||= false
-    self.fuzz_level = '30%' if self.fuzz_level.blank?
-    self.highlight_colour = 'ff0000' if self.highlight_colour.blank?
+    self.fuzz_level = '30%' if fuzz_level.blank?
+    self.highlight_colour = 'ff0000' if highlight_colour.blank?
   end
 
   def update_baseline
     return unless self.pass
-    Baseline.find_or_initialize_by(key: self.key).update_attributes!(
-      key: self.key,
-      name: self.name,
-      browser: self.browser,
-      size: self.size,
-      suite: self.run.suite,
-      screenshot: self.screenshot,
-      test_id: self.id
+
+    Baseline.find_or_initialize_by(key: key).update_attributes!(
+      key: key,
+      name: name,
+      browser: browser,
+      size: size,
+      suite: run.suite,
+      screenshot: screenshot,
+      test_id: id
     )
   end
 end

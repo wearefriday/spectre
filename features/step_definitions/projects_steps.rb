@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^there are projects with tests$/) do
   3.times do
     FactoryGirl.create(:test)
@@ -9,7 +11,7 @@ When(/^we visit the projects page$/) do
 end
 
 Then(/^we should see the projects$/) do
-  within ".body" do
-    expect(page.all("tr.project").count).to eq 3
+  within '.body' do
+    expect(page.all('tr.project').count).to eq 3
   end
 end

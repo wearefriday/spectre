@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Project < ActiveRecord::Base
-  has_many :suites, :dependent => :destroy
+  has_many :suites, dependent: :destroy
   after_initialize :create_slug
 
   def create_slug

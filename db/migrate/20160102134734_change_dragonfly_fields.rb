@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeDragonflyFields < ActiveRecord::Migration
   def change
     remove_column :runs, :screenshot_uid, :string
