@@ -4,4 +4,6 @@ set -e
 
 RAILS_ENV=$RAILS_ENV bin/rake assets:precompile
 
+RAILS_ENV=$RAILS_ENV bin/rake db:schema:load
+
 bundle exec puma -C config/puma.rb -e $RAILS_ENV -p $PORT
