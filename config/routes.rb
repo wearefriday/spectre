@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  root to: 'projects'
+  root to: 'projects#index'
 
   get '/auth/callback', to: 'sessions#create'
 
