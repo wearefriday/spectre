@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+RAILS_ENV=$RAILS_ENV bundle exec rake assets:precompile
+
+RAILS_ENV=$RAILS_ENV bundle exec rake db:migrate
+
+bundle exec puma -C config/puma.rb -e $RAILS_ENV -p $PORT
