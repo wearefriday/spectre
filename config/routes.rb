@@ -13,8 +13,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :runs, only: %i[new create]
-  resources :tests, only: %i[update new create]
+  resources :runs, only: %i[new]
+  resources :tests, only: %i[update new]
+
+  namespace :api do
+    namespace :v1 do
+      resources :runs, only: %i[create]
+      resources :tests, only: %i[create]
+    end
+  end
 
   get '/baselines/:key', to: 'baselines#show', as: :baseline
 end

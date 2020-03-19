@@ -20,11 +20,4 @@ class RunsController < ApplicationController
   def new
     @run = Run.new
   end
-
-  def create
-    project = Project.find_or_create_by(name: params[:project])
-    suite = project.suites.find_or_create_by(name: params[:suite])
-    @run = suite.runs.create
-    render json: @run.to_json
-  end
 end

@@ -4,7 +4,7 @@ module Api
   class BaseController < ApplicationController
     protect_from_forgery with: :null_session
 
-    skip_before_action :authorize!
+    skip_before_action :oauth_authenticate!
 
     http_basic_authenticate_with(
       name: 'spectre_api',

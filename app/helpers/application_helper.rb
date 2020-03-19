@@ -9,7 +9,7 @@ module ApplicationHelper
     "<span title=\"#{date.to_formatted_s(:long_ordinal)}\">#{time_ago_in_words(date)} ago</span>".html_safe
   end
 
-  def authorize!
+  def oauth_authenticate!
     return if authenticated?
 
     reset_session

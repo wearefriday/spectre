@@ -4,7 +4,7 @@ class UnauthorizedError < StandardError
 end
 
 class SessionsController < ApplicationController
-  skip_before_action :authorize!, only: [:create]
+  skip_before_action :oauth_authenticate!, only: [:create]
   rescue_from UnauthorizedError, with: :unauthorized
 
   def create
