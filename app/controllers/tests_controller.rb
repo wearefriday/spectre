@@ -4,6 +4,12 @@ require 'image_processor'
 
 class TestsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :oauth_authenticate!, only: [:create]
+
+  http_basic_authenticate_with(
+    name: 'spectre_api',
+    password: ENV['API_PASSWORD'] || SecureRandom.uuid
+  )
 
   def new
     @test = Test.new
