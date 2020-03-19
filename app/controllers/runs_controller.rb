@@ -2,12 +2,6 @@
 
 class RunsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  skip_before_action :oauth_authenticate!, only: [:create]
-
-  http_basic_authenticate_with(
-    name: 'spectre_api',
-    password: ENV['API_PASSWORD'] || SecureRandom.uuid
-  )
 
   def show
     project = Project.find_by_slug!(params[:project_slug])
@@ -25,12 +19,5 @@ class RunsController < ApplicationController
 
   def new
     @run = Run.new
-  end
-
-  def create
-    project = Project.find_or_create_by(name: params[:project])
-    suite = project.suites.find_or_create_by(name: params[:suite])
-    @run = suite.runs.create
-    render json: @run.to_json
   end
 end
