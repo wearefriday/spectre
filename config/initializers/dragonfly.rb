@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'dragonfly'
+require 'dragonfly/s3_data_store'
 
 # Configure
 Dragonfly.app.configure do
@@ -10,9 +11,11 @@ Dragonfly.app.configure do
 
   url_format '/media/:job/:name'
 
-  datastore :file,
-            root_path: Rails.root.join('public/system/dragonfly', Rails.env),
-            server_root: Rails.root.join('public')
+  datastore :s3,
+            bucket_name: ENV.fetch('S3_BUCKET'),
+            access_key_id: ENV.fetch('S3_ACCESS_KEY'),
+            secret_access_key: ENV.fetch('S3_SECRET_KEY'),
+            region: ENV.fetch('S3_REGION')
 end
 
 # Logger
