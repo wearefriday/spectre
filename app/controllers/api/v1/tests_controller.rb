@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::TestsController < Api::BaseController
+  require 'image_processor'
 
   http_basic_authenticate_with(
     name: 'spectre_api',
