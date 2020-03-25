@@ -28,6 +28,7 @@
           <% if suite.latest_run.failing_tests > 0 %>
             <a class="label label--fail" href="<%= project_suite_run_path(suite.project, suite, suite.latest_run, params: { status: 'fail' }) %>"><%= suite.latest_run.failing_tests %> failed</a>
           <% end %>
+          <%= button_to "Delete #{project.name}", project, method: :delete, confirm: "Are you sure?" %>
         </td>
       </tr>
       <% end %>

@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   get '/auth/callback', to: 'sessions#create'
 
-  resources :projects, param: :slug, only: [:index] do
-    resources :suites, param: :slug, only: [:show] do
-      resources :runs, param: :sequential_id, only: [:show]
+  resources :projects, param: :slug, only: %i[index destroy] do
+    resources :suites, param: :slug, only: %i[show] do
+      resources :runs, param: :sequential_id, only: %i[show]
     end
   end
 
