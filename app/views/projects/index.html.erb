@@ -9,7 +9,8 @@
     <tr>
       <th>Name</th>
       <th>Suite</th>
-      <th>Last run</th>
+      <th>Last Run</th>
+      <th>Delete Project</th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +30,9 @@
             <a class="label label--fail" href="<%= project_suite_run_path(suite.project, suite, suite.latest_run, params: { status: 'fail' }) %>"><%= suite.latest_run.failing_tests %> failed</a>
           <% end %>
         </td>
+          <td>
+            <%= button_to "Delete Project", project, data: { confirm: "Are you damn sure you want to delete #{project.name} after someone worked so hard to create it?" }, method: :delete %>
+          </td>
       </tr>
       <% end %>
     <% end %>

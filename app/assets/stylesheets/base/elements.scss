@@ -66,10 +66,12 @@ button,
 input[type='submit'],
 input[type='button'] {
   @include font-family('merriweather');
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
   color: colour('white');
   appearance: none;
   padding: .5em .75em;
+  border-radius: 5px;
   cursor: pointer;
   background-color: colour('warm-grey');
 
