@@ -8,9 +8,18 @@ Dragonfly.app.configure do
 
   url_format "/media/:job/:name"
 
+  # If you want to use S3 to store your screenshots (if you're hosting on Heroku), comment the next section
+  # and uncomment the S3 datastore section.
+
   datastore :file,
     root_path: Rails.root.join('public/system/dragonfly', Rails.env),
     server_root: Rails.root.join('public')
+
+#  datastore :s3,
+#    bucket_name: 'YOUR_S3_BUCKET',
+#    access_key_id: 'YOUR_ACCESS_KEY',
+#    secret_access_key: 'YOUR_SECRET_ACCESS_KEY'
+
 end
 
 # Logger
