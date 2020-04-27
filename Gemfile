@@ -17,6 +17,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_admin'
 gem 'sequenced'
 gem 'dragonfly', '~> 1.0.12'
+gem 'dragonfly-s3_data_store'
 gem 'image_size'
 
 # Use ActiveModel has_secure_password
