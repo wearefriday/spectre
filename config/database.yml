@@ -2,7 +2,7 @@ default: &default
   adapter: postgresql
   encoding: utf8
   username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || ENV['DATABASE_PASSWORD'] %>
   pool: 5
   timeout: 5000
 
