@@ -4,6 +4,7 @@ WORKDIR /opt
 RUN curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar -jxf -
 RUN apt-get -qq update && apt-get -qq install fontconfig
 RUN ln -s /opt/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
+RUN sed -ri '/policy.*name="height"/s/value="([^"]*)"/value="32KP"/' /etc/ImageMagick-6/policy.xml
 
 WORKDIR /app
 ADD Gemfile* /app/
