@@ -1,4 +1,4 @@
-FROM quay.octanner.io/base/oct-ruby:2.6.2
+FROM harbor.octanner.io/base/oct-ruby:2.7.1
 
 WORKDIR /opt
 RUN curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar -jxf -
