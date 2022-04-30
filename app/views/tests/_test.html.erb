@@ -11,8 +11,9 @@
   <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_thumbnail), test.screenshot.url, class: 'test__image') unless test.screenshot.nil? %></td>
   <td style="width:1px;"><%= link_to(thumbnail(test.screenshot_diff_thumbnail), test.screenshot_diff.url, class: 'test__image') unless test.screenshot_diff.nil? %></td>
   <td>
-    <span class="test__diff text-muted"><%= test.diff == 0 ? 'No' : "#{test.diff}%" %> difference</span>
     <span class="test__status label label--<%= test.pass? ? 'pass' : 'fail' %>"><%= test.pass? ? 'Pass' : 'Fail' %></span>
+    <span class="test__diff text-muted"><%= test.diff == 0 ? 'No' : "#{test.diff}%" %> difference</span>
+    <span class="test__diff-tolerance text-muted"><%= "#{test.diff_threshold || 0.1}%" %> tolerance</span>
     <%# if test.five_consecutive_failures %>
       <!--span class="label label--warning">Consistently failing test</span-->
     <%# end %>

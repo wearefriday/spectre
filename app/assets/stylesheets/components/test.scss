@@ -33,6 +33,13 @@
 }
 
 .test__diff {
+  @include font-size('medium');
+  display: block;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+
+.test__diff-tolerance {
   @include font-size('small');
   display: block;
   margin-bottom: 5px;
