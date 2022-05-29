@@ -1,3 +1,11 @@
+# Spectre is no longer being maintained here
+
+Spectre hasn't seen active development for some time. We've found a lot more mileage from https://percy.io which is easy to use and zero maintenance.
+
+Alternatively try a fork with active development:
+* https://github.com/lanej0/spectre
+* https://github.com/octanner/spectre
+
 # Spectre
 
 [![Build Status](https://travis-ci.org/wearefriday/spectre.svg?branch=master)](https://travis-ci.org/wearefriday/spectre)
